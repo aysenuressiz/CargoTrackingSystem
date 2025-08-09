@@ -1,0 +1,71 @@
+package com.kargo.servlet;
+
+import com.kargo.dao.UserDAO;
+import com.kargo.model.User;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private UserDAO userDAO = new UserDAO();
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        request.getRequestDispatcher("login.jsp").forward(request, response);
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        
+        if (username == null || password == null || username.trim().isEmpty() || password.trim().isEmpty()) {
+            request.setAttribute("error", "Kullanıcı adı ve şifre gereklidir.");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
+        
+        User user = userDAO.authenticate(username.trim(), password);
+        
+        if (user != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            
+            // Rol tabanlı yönlendirme
+            switch (user.getRoleName()) {
+                case "Admin":
+                    response.sendRedirect("admin/dashboard");
+                    break;
+                case "Genel Müdür":
+                case "Şube Müdürü":
+                case "Depo Görevlisi":
+                case "Bölge Sorumlusu":
+                case "Kurye":
+                    response.sendRedirect("employee/dashboard");
+                    break;
+                case "Müşteri":
+                    response.sendRedirect("customer/dashboard");
+                    break;
+                case "Şirket":
+                    response.sendRedirect("company/dashboard");
+                    break;
+                default:
+                    response.sendRedirect("dashboard");
+                    break;
+            }
+        } else {
+            request.setAttribute("error", "Geçersiz kullanıcı adı veya şifre.");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+    }
+}
