@@ -46,11 +46,7 @@ public class LoginServlet extends HttpServlet {
                 case "Admin":
                     response.sendRedirect("admin/dashboard");
                     break;
-                case "Genel Müdür":
-                case "Şube Müdürü":
-                case "Depo Görevlisi":
-                case "Bölge Sorumlusu":
-                case "Kurye":
+                case "Çalışan":
                     response.sendRedirect("employee/dashboard");
                     break;
                 case "Müşteri":

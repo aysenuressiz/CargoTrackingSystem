@@ -144,11 +144,7 @@ CREATE TABLE CargoStatuses (
 -- Temel verileri ekle
 INSERT INTO Roles (role_name) VALUES 
 ('Admin'),
-('Genel Müdür'),
-('Şube Müdürü'),
-('Depo Görevlisi'),
-('Bölge Sorumlusu'),
-('Kurye'),
+('Çalışan'),
 ('Müşteri'),
 ('Şirket');
 
