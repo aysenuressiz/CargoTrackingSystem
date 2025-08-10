@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kullanıcı Yönetimi - Admin Panel</title>
+    <title>Çalışan Yönetimi - Admin Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
@@ -44,12 +44,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="${pageContext.request.contextPath}/admin/users">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/admin/users">
                                 <i class="fas fa-users"></i> Kullanıcı Yönetimi
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/admin/employees">
+                            <a class="nav-link active" href="${pageContext.request.contextPath}/admin/employees">
                                 <i class="fas fa-user-tie"></i> Çalışan Yönetimi
                             </a>
                         </li>
@@ -80,10 +80,10 @@
             <!-- Main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2"><i class="fas fa-users me-2"></i>Kullanıcı Yönetimi</h1>
+                    <h1 class="h2"><i class="fas fa-user-tie me-2"></i>Çalışan Yönetimi</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
-                            <i class="fas fa-user-plus"></i> Yeni Kullanıcı Ekle
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+                            <i class="fas fa-user-plus"></i> Yeni Çalışan Ekle
                         </button>
                     </div>
                 </div>
@@ -103,62 +103,44 @@
                     </div>
                 </c:if>
 
-                <!-- Users Table -->
+                <!-- Employees Table -->
                 <div class="card shadow">
                     <div class="card-header bg-white">
-                        <h5 class="mb-0">Tüm Kullanıcılar</h5>
+                        <h5 class="mb-0">Tüm Çalışanlar</h5>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover" id="usersTable">
+                            <table class="table table-hover" id="employeesTable">
                                 <thead class="table-light">
                                     <tr>
                                         <th>ID</th>
-                                        <th>Kullanıcı Adı</th>
+                                        <th>Ad Soyad</th>
                                         <th>Email</th>
                                         <th>Telefon</th>
-                                        <th>Rol</th>
-                                        <th>Kayıt Tarihi</th>
+                                        <th>Pozisyon</th>
+                                        <th>Şube</th>
                                         <th>İşlemler</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="user" items="${users}">
+                                    <c:forEach var="employee" items="${employees}">
                                         <tr>
-                                            <td>${user.userId}</td>
-                                            <td>${user.username}</td>
-                                            <td>${user.email}</td>
-                                            <td>${user.phone}</td>
+                                            <td>${employee.employeeId}</td>
+                                            <td>${employee.firstName} ${employee.lastName}</td>
+                                            <td>${employee.email}</td>
+                                            <td>${employee.phone}</td>
                                             <td>
-                                                <c:choose>
-                                                    <c:when test="${user.roleName eq 'Admin'}">
-                                                        <span class="badge bg-danger">${user.roleName}</span>
-                                                    </c:when>
-                                                    <c:when test="${user.roleName eq 'Genel Müdür' or user.roleName eq 'Şube Müdürü' or user.roleName eq 'Depo Görevlisi' or user.roleName eq 'Bölge Sorumlusu' or user.roleName eq 'Kurye'}">
-                                                        <span class="badge bg-success">${user.roleName}</span>
-                                                    </c:when>
-                                                    <c:when test="${user.roleName eq 'Müşteri'}">
-                                                        <span class="badge bg-primary">${user.roleName}</span>
-                                                    </c:when>
-                                                    <c:when test="${user.roleName eq 'Şirket'}">
-                                                        <span class="badge bg-warning">${user.roleName}</span>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <span class="badge bg-secondary">${user.roleName}</span>
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                <span class="badge bg-info">${employee.positionName}</span>
                                             </td>
-                                            <td>
-                                                <fmt:formatDate value="${user.createdAt}" pattern="dd.MM.yyyy HH:mm"/>
-                                            </td>
+                                            <td>${employee.branchName}</td>
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <button type="button" class="btn btn-sm btn-outline-primary" 
-                                                            onclick="editUser(${user.userId})">
+                                                            onclick="editEmployee(${employee.employeeId})">
                                                         <i class="fas fa-edit"></i>
                                                     </button>
                                                     <button type="button" class="btn btn-sm btn-outline-danger" 
-                                                            onclick="deleteUser(${user.userId}, '${user.username}')">
+                                                            onclick="deleteEmployee(${employee.employeeId}, '${employee.firstName} ${employee.lastName}')">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -174,16 +156,31 @@
         </div>
     </div>
 
-    <!-- Add User Modal -->
-    <div class="modal fade" id="addUserModal" tabindex="-1">
+    <!-- Add Employee Modal -->
+    <div class="modal fade" id="addEmployeeModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="fas fa-user-plus me-2"></i>Yeni Kullanıcı Ekle</h5>
+                    <h5 class="modal-title"><i class="fas fa-user-plus me-2"></i>Yeni Çalışan Ekle</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <form action="${pageContext.request.contextPath}/admin/create-user" method="post">
+                <form action="${pageContext.request.contextPath}/admin/create-employee" method="post">
                     <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="firstName" class="form-label">Ad</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="lastName" class="form-label">Soyad</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -193,8 +190,10 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <label for="email" class="form-label">Email (@kargo.com.tr)</label>
+                                    <input type="email" class="form-control" id="email" name="email" 
+                                           pattern=".*@kargo\.com\.tr$" 
+                                           title="Çalışanlar için @kargo.com.tr uzantılı email kullanılmalıdır" required>
                                 </div>
                             </div>
                         </div>
@@ -214,24 +213,34 @@
                             </div>
                         </div>
                         
-                        <div class="mb-3">
-                            <label for="roleId" class="form-label">Rol</label>
-                            <select class="form-select" id="roleId" name="roleId" required>
-                                <option value="">Rol Seçin</option>
-                                <option value="1">Admin</option>
-                                <option value="2">Genel Müdür</option>
-                                <option value="3">Şube Müdürü</option>
-                                <option value="4">Depo Görevlisi</option>
-                                <option value="5">Bölge Sorumlusu</option>
-                                <option value="6">Kurye</option>
-                                <option value="7">Müşteri</option>
-                                <option value="8">Şirket</option>
-                            </select>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="positionId" class="form-label">Pozisyon</label>
+                                    <select class="form-select" id="positionId" name="positionId" required>
+                                        <option value="">Pozisyon Seçin</option>
+                                        <c:forEach var="position" items="${positions}">
+                                            <option value="${position.positionId}">${position.positionName}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="branchId" class="form-label">Şube</label>
+                                    <select class="form-select" id="branchId" name="branchId" required>
+                                        <option value="">Şube Seçin</option>
+                                        <c:forEach var="branch" items="${branches}">
+                                            <option value="${branch.branchId}">${branch.branchName}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
-                        <button type="submit" class="btn btn-primary">Kullanıcı Ekle</button>
+                        <button type="submit" class="btn btn-primary">Çalışan Ekle</button>
                     </div>
                 </form>
             </div>
@@ -243,20 +252,20 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-danger"><i class="fas fa-exclamation-triangle me-2"></i>Kullanıcı Sil</h5>
+                    <h5 class="modal-title text-danger"><i class="fas fa-exclamation-triangle me-2"></i>Çalışan Sil</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Bu kullanıcıyı silmek istediğinizden emin misiniz?</p>
-                    <p><strong id="deleteUserName"></strong></p>
+                    <p>Bu çalışanı silmek istediğinizden emin misiniz?</p>
+                    <p><strong id="deleteEmployeeName"></strong></p>
                     <div class="alert alert-warning">
                         <i class="fas fa-exclamation-triangle me-2"></i>Bu işlem geri alınamaz!
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
-                    <form action="${pageContext.request.contextPath}/admin/delete-user" method="post" style="display: inline;">
-                        <input type="hidden" id="deleteUserId" name="userId">
+                    <form action="${pageContext.request.contextPath}/admin/delete-employee" method="post" style="display: inline;">
+                        <input type="hidden" id="deleteEmployeeId" name="employeeId">
                         <button type="submit" class="btn btn-danger">Sil</button>
                     </form>
                 </div>
@@ -271,7 +280,7 @@
     
     <script>
         $(document).ready(function() {
-            $('#usersTable').DataTable({
+            $('#employeesTable').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/tr.json"
                 },
@@ -280,14 +289,13 @@
             });
         });
         
-        function editUser(userId) {
-            // Implement edit functionality
-            window.location.href = '${pageContext.request.contextPath}/admin/edit-user?id=' + userId;
+        function editEmployee(employeeId) {
+            window.location.href = '${pageContext.request.contextPath}/admin/edit-employee?id=' + employeeId;
         }
         
-        function deleteUser(userId, username) {
-            document.getElementById('deleteUserId').value = userId;
-            document.getElementById('deleteUserName').textContent = username;
+        function deleteEmployee(employeeId, employeeName) {
+            document.getElementById('deleteEmployeeId').value = employeeId;
+            document.getElementById('deleteEmployeeName').textContent = employeeName;
             
             var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
             deleteModal.show();

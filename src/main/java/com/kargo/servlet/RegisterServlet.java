@@ -42,9 +42,9 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String phone = request.getParameter("phone");
         
-        // @kargo.com.tr uzantılı email kontrolü (admin kayıt için)
+        // @kargo.com.tr uzantılı email kontrolü (çalışan kayıtları sadece admin tarafından yapılabilir)
         if (email.endsWith("@kargo.com.tr")) {
-            request.setAttribute("error", "Admin kayıtları sadece sistem yöneticisi tarafından yapılabilir.");
+            request.setAttribute("error", "Çalışan kayıtları sadece sistem yöneticisi tarafından yapılabilir.");
             request.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
             return;
         }

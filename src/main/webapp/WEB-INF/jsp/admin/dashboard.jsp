@@ -56,6 +56,11 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/admin/employees">
+                                <i class="fas fa-user-tie"></i> Çalışan Yönetimi
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/admin/branches">
                                 <i class="fas fa-building"></i> Şube Yönetimi
                             </a>
