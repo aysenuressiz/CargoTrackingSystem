@@ -21,6 +21,7 @@ public class Cargo {
     private String receiverAddress;
     private String currentStatus;
     private String currentLocation;
+    private Integer courierUserId; // Kurye atama için
     
     // Constructors
     public Cargo() {}
@@ -154,5 +155,13 @@ public class Cargo {
     
     public void setCurrentLocation(String currentLocation) {
         this.currentLocation = currentLocation;
+    }
+    
+    public Integer getCourierUserId() {
+        return courierUserId;
+    }
+    
+    public void setCourierUserId(Integer courierUserId) {
+        this.courierUserId = courierUserId;
     }
 }

@@ -32,6 +32,10 @@
         .stats-card:hover {
             transform: translateY(-2px);
         }
+        .position-badge {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -42,7 +46,15 @@
                 <div class="position-sticky pt-3">
                     <div class="text-center mb-4">
                         <h4 class="text-white"><i class="fas fa-user-tie"></i> Çalışan Paneli</h4>
-                        <small class="text-white-50">${sessionScope.user.firstName} ${sessionScope.user.lastName}</small>
+                        <small class="text-white-50">${sessionScope.employee.firstName} ${sessionScope.employee.lastName}</small>
+                        <br>
+                        <span class="badge bg-light text-dark position-badge">
+                            <i class="fas fa-id-badge"></i> ${sessionScope.employee.positionName}
+                        </span>
+                        <c:if test="${not empty sessionScope.employee.branchName}">
+                            <br>
+                            <small class="text-white-50">${sessionScope.employee.branchName}</small>
+                        </c:if>
                     </div>
                     
                     <ul class="nav flex-column">
@@ -51,33 +63,90 @@
                                 <i class="fas fa-tachometer-alt"></i> Dashboard
                             </a>
                         </li>
+                        
+                        <!-- Kargo Yönetimi - Tüm pozisyonlar -->
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/employee/cargos">
                                 <i class="fas fa-box"></i> Kargo Yönetimi
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/employee/tracking">
-                                <i class="fas fa-search"></i> Kargo Takip
-                            </a>
-                        </li>
+                        
+                        <!-- Durum Güncelleme - Tüm pozisyonlar -->
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/employee/status-update">
                                 <i class="fas fa-edit"></i> Durum Güncelle
                             </a>
                         </li>
+                        
+                        
+                        
+                        <!-- Kargo Takip - Tüm pozisyonlar -->
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/employee/reports">
-                                <i class="fas fa-chart-line"></i> Raporlar
+                            <a class="nav-link" href="${pageContext.request.contextPath}/employee/tracking">
+                                <i class="fas fa-search"></i> Kargo Takip
                             </a>
                         </li>
+                        
+                        <!-- Genel Müdür ve Bölge Sorumlusu için Şube Yönetimi -->
+                        <c:if test="${sessionScope.employee.positionId == 1 || sessionScope.employee.positionId == 4}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/employee/branches">
+                                    <i class="fas fa-building"></i> Şube Yönetimi
+                                </a>
+                            </li>
+                        </c:if>
+                        
+                        <!-- Şube Müdürü için Çalışan Yönetimi -->
+                        <c:if test="${sessionScope.employee.positionId == 2}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/employee/staff">
+                                    <i class="fas fa-users"></i> Çalışan Yönetimi
+                                </a>
+                            </li>
+                        </c:if>
+                        
+                        <!-- Depo Görevlisi için Depo İşlemleri -->
+                        <c:if test="${sessionScope.employee.positionId == 3}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/employee/warehouse">
+                                    <i class="fas fa-warehouse"></i> Depo İşlemleri
+                                </a>
+                            </li>
+                        </c:if>
+                        
+                        <!-- Kurye için Teslimat İşlemleri -->
+                        <c:if test="${sessionScope.employee.positionId == 5}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/employee/delivery">
+                                    <i class="fas fa-truck"></i> Teslimat İşlemleri
+                                </a>
+                            </li>
+                        </c:if>
+                        
+                        <!-- Raporlar - Genel Müdür, Bölge Sorumlusu, Şube Müdürü -->
+                        <c:if test="${sessionScope.employee.positionId == 1 || sessionScope.employee.positionId == 4 || sessionScope.employee.positionId == 2}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/employee/reports">
+                                    <i class="fas fa-chart-line"></i> Raporlar
+                                </a>
+                            </li>
+                        </c:if>
+                        
+                        <!-- Genel Müdür için Sistem Yönetimi -->
+                        <c:if test="${sessionScope.employee.positionId == 1}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/employee/system">
+                                    <i class="fas fa-cogs"></i> Sistem Yönetimi
+                                </a>
+                            </li>
+                        </c:if>
                     </ul>
                     
                     <hr class="my-3" style="border-color: rgba(255,255,255,0.2);">
                     
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/profile">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/employee/profile">
                                 <i class="fas fa-user"></i> Profil
                             </a>
                         </li>
@@ -93,7 +162,10 @@
             <!-- Main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Çalışan Dashboard</h1>
+                    <h1 class="h2">
+                        <i class="fas fa-tachometer-alt"></i> 
+                        ${sessionScope.employee.positionName} Dashboard
+                    </h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
                             <button type="button" class="btn btn-sm btn-outline-secondary">
@@ -103,6 +175,28 @@
                     </div>
                 </div>
 
+                <!-- Pozisyon Bazlı Hoşgeldin Mesajı -->
+                <div class="alert alert-info" role="alert">
+                    <h5><i class="fas fa-info-circle"></i> Hoş Geldiniz!</h5>
+                    <c:choose>
+                        <c:when test="${sessionScope.employee.positionId == 1}">
+                            <p class="mb-0">Genel Müdür olarak şirketin tüm operasyonlarını yönetebilir, stratejik raporları inceleyebilir ve sistem ayarlarını yapabilirsiniz.</p>
+                        </c:when>
+                        <c:when test="${sessionScope.employee.positionId == 2}">
+                            <p class="mb-0">Şube Müdürü olarak ${sessionScope.employee.branchName} şubesinin operasyonlarını yönetebilir ve çalışanlarınızı koordine edebilirsiniz.</p>
+                        </c:when>
+                        <c:when test="${sessionScope.employee.positionId == 3}">
+                            <p class="mb-0">Depo Görevlisi olarak kargo teslim alma, hazırlama ve kuryelere teslim etme işlemlerini gerçekleştirebilirsiniz.</p>
+                        </c:when>
+                        <c:when test="${sessionScope.employee.positionId == 4}">
+                            <p class="mb-0">Bölge Sorumlusu olarak bölgenizdeki şubeleri denetleyebilir ve bölgesel raporları inceleyebilirsiniz.</p>
+                        </c:when>
+                        <c:when test="${sessionScope.employee.positionId == 5}">
+                            <p class="mb-0">Kurye olarak size atanan teslimatları görüntüleyebilir ve teslim durumlarını güncelleyebilirsiniz.</p>
+                        </c:when>
+                    </c:choose>
+                </div>
+
                 <!-- Stats Cards -->
                 <div class="row mb-4">
                     <div class="col-md-3 mb-3">
@@ -110,7 +204,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <h4 class="card-title">25</h4>
+                                        <h4 class="card-title">${stats.todayCargos}</h4>
                                         <p class="card-text">Bugünkü Kargolar</p>
                                     </div>
                                     <div class="align-self-center">
@@ -126,7 +220,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <h4 class="card-title">18</h4>
+                                        <h4 class="card-title">${stats.deliveredCargos}</h4>
                                         <p class="card-text">Teslim Edilen</p>
                                     </div>
                                     <div class="align-self-center">
@@ -142,7 +236,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <h4 class="card-title">5</h4>
+                                        <h4 class="card-title">${stats.inDeliveryCargos}</h4>
                                         <p class="card-text">Dağıtımda</p>
                                     </div>
                                     <div class="align-self-center">
@@ -158,7 +252,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <h4 class="card-title">2</h4>
+                                        <h4 class="card-title">${stats.pendingCargos}</h4>
                                         <p class="card-text">Bekleyen</p>
                                     </div>
                                     <div class="align-self-center">
@@ -168,6 +262,117 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Pozisyon Bazlı Özel Kartlar -->
+                <div class="row mb-4">
+                    <!-- Genel Müdür için Şube Performansı -->
+                    <c:if test="${sessionScope.employee.positionId == 1}">
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
+                                <div class="card-header bg-primary text-white">
+                                    <h5><i class="fas fa-chart-bar"></i> Şube Performansı</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Şube</th>
+                                                    <th>Günlük Kargo</th>
+                                                    <th>Başarı Oranı</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Merkez Şube</td>
+                                                    <td>45</td>
+                                                    <td><span class="badge bg-success">95%</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kadıköy Şube</td>
+                                                    <td>32</td>
+                                                    <td><span class="badge bg-warning">87%</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                    
+                    <!-- Şube Müdürü için Çalışan Performansı -->
+                    <c:if test="${sessionScope.employee.positionId == 2}">
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
+                                <div class="card-header bg-success text-white">
+                                    <h5><i class="fas fa-users"></i> Çalışan Performansı</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Çalışan</th>
+                                                    <th>Pozisyon</th>
+                                                    <th>Günlük İşlem</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Ahmet Yılmaz</td>
+                                                    <td>Depo Görevlisi</td>
+                                                    <td><span class="badge bg-success">25 kargo</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mehmet Kaya</td>
+                                                    <td>Kurye</td>
+                                                    <td><span class="badge bg-info">18 teslimat</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                    
+                    <!-- Kurye için Teslimat Listesi -->
+                    <c:if test="${sessionScope.employee.positionId == 5}">
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
+                                <div class="card-header bg-warning text-white">
+                                    <h5><i class="fas fa-route"></i> Bugünkü Teslimatlar</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Kargo No</th>
+                                                    <th>Adres</th>
+                                                    <th>Durum</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>KT202408090001</td>
+                                                    <td>Kadıköy, İstanbul</td>
+                                                    <td><span class="badge bg-warning">Yolda</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>KT202408090002</td>
+                                                    <td>Beşiktaş, İstanbul</td>
+                                                    <td><span class="badge bg-info">Bekliyor</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
                 </div>
 
                 <!-- Recent Activities -->
@@ -230,9 +435,25 @@
                                     <a href="${pageContext.request.contextPath}/track" class="btn btn-info">
                                         <i class="fas fa-search"></i> Kargo Ara
                                     </a>
-                                    <a href="${pageContext.request.contextPath}/employee/reports" class="btn btn-warning">
-                                        <i class="fas fa-file-alt"></i> Rapor Oluştur
-                                    </a>
+                                    
+                                    <!-- Pozisyon bazlı özel butonlar -->
+                                    <c:if test="${sessionScope.employee.positionId == 1 || sessionScope.employee.positionId == 4 || sessionScope.employee.positionId == 2}">
+                                        <a href="${pageContext.request.contextPath}/employee/reports" class="btn btn-warning">
+                                            <i class="fas fa-file-alt"></i> Rapor Oluştur
+                                        </a>
+                                    </c:if>
+                                    
+                                    <c:if test="${sessionScope.employee.positionId == 3}">
+                                        <a href="${pageContext.request.contextPath}/employee/warehouse" class="btn btn-secondary">
+                                            <i class="fas fa-warehouse"></i> Depo İşlemleri
+                                        </a>
+                                    </c:if>
+                                    
+                                    <c:if test="${sessionScope.employee.positionId == 5}">
+                                        <a href="${pageContext.request.contextPath}/employee/delivery" class="btn btn-warning">
+                                            <i class="fas fa-truck"></i> Teslimat Listesi
+                                        </a>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>

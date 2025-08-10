@@ -367,15 +367,18 @@ public class CargoDAO {
         List<Cargo> cargos = new ArrayList<>();
         String sql = "SELECT c.*, " +
                     "sender.username as sender_name, receiver.username as receiver_name, " +
+                    "sender_addr.full_address as sender_address, receiver_addr.full_address as receiver_address, " +
                     "cs.status_name as current_status " +
                     "FROM Cargos c " +
                     "LEFT JOIN Users sender ON c.sender_user_id = sender.user_id " +
                     "LEFT JOIN Users receiver ON c.receiver_user_id = receiver.user_id " +
+                    "LEFT JOIN Addresses sender_addr ON sender.user_id = sender_addr.user_id " +
+                    "LEFT JOIN Addresses receiver_addr ON receiver.user_id = receiver_addr.user_id " +
                     "LEFT JOIN CargoStatuses cs_latest ON c.cargo_id = cs_latest.cargo_id " +
                     "LEFT JOIN Statuses cs ON cs_latest.status_type_id = cs.status_type_id " +
                     "WHERE (c.sender_user_id = ? OR c.receiver_user_id = ?) " +
-                    "AND cs_latest.update_date = (SELECT MAX(update_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
-                    "AND cs.status_name = 'Teslim Edildi' " +
+                    "AND cs_latest.status_type_id = 5 " + // Teslim edildi
+                    "AND cs_latest.updated_date = (SELECT MAX(updated_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
                     "ORDER BY c.shipping_date DESC";
         
         try (Connection conn = DatabaseUtil.getConnection();
@@ -386,8 +389,7 @@ public class CargoDAO {
             ResultSet rs = stmt.executeQuery();
             
             while (rs.next()) {
-                Cargo cargo = mapResultSetToCargo(rs);
-                cargos.add(cargo);
+                cargos.add(mapResultSetToCargo(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -395,6 +397,127 @@ public class CargoDAO {
         return cargos;
     }
     
+    // Pozisyon bazlı kargo listesi metodları
+    public List<Cargo> getCargosByBranch(int branchId) {
+        List<Cargo> cargos = new ArrayList<>();
+        String sql = "SELECT c.*, " +
+                    "sender.username as sender_name, receiver.username as receiver_name, " +
+                    "sender_addr.full_address as sender_address, receiver_addr.full_address as receiver_address, " +
+                    "cs.status_name as current_status " +
+                    "FROM Cargos c " +
+                    "LEFT JOIN Users sender ON c.sender_user_id = sender.user_id " +
+                    "LEFT JOIN Users receiver ON c.receiver_user_id = receiver.user_id " +
+                    "LEFT JOIN Addresses sender_addr ON sender.user_id = sender_addr.user_id " +
+                    "LEFT JOIN Addresses receiver_addr ON receiver.user_id = receiver_addr.user_id " +
+                    "LEFT JOIN CargoStatuses cs_latest ON c.cargo_id = cs_latest.cargo_id " +
+                    "LEFT JOIN Statuses cs ON cs_latest.status_type_id = cs.status_type_id " +
+                    "WHERE c.sender_user_id IN (SELECT user_id FROM Employees WHERE branch_id = ?) " +
+                    "AND cs_latest.updated_date = (SELECT MAX(updated_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
+                    "ORDER BY c.shipping_date DESC";
+        
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, branchId);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                cargos.add(mapResultSetToCargo(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cargos;
+    }
+    
+    public List<Cargo> getCargosByRegion(int branchId) {
+        // Bölge Sorumlusu için bölgedeki tüm şubelerin kargoları
+        List<Cargo> cargos = new ArrayList<>();
+        String sql = "SELECT c.*, " +
+                    "sender.username as sender_name, receiver.username as receiver_name, " +
+                    "sender_addr.full_address as sender_address, receiver_addr.full_address as receiver_address, " +
+                    "cs.status_name as current_status " +
+                    "FROM Cargos c " +
+                    "LEFT JOIN Users sender ON c.sender_user_id = sender.user_id " +
+                    "LEFT JOIN Users receiver ON c.receiver_user_id = receiver.user_id " +
+                    "LEFT JOIN Addresses sender_addr ON sender.user_id = sender_addr.user_id " +
+                    "LEFT JOIN Addresses receiver_addr ON receiver.user_id = receiver_addr.user_id " +
+                    "LEFT JOIN CargoStatuses cs_latest ON c.cargo_id = cs_latest.cargo_id " +
+                    "LEFT JOIN Statuses cs ON cs_latest.status_type_id = cs.status_type_id " +
+                    "WHERE c.sender_user_id IN (SELECT user_id FROM Employees WHERE branch_id IN " +
+                    "(SELECT branch_id FROM Branches WHERE branch_id = ? OR branch_id IN " +
+                    "(SELECT branch_id FROM Branches WHERE address_id IN " +
+                    "(SELECT address_id FROM Addresses WHERE city_id = " +
+                    "(SELECT city_id FROM Addresses WHERE address_id = " +
+                    "(SELECT address_id FROM Branches WHERE branch_id = ?)))))) " +
+                    "AND cs_latest.updated_date = (SELECT MAX(updated_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
+                    "ORDER BY c.shipping_date DESC";
+        
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, branchId);
+            stmt.setInt(2, branchId);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                cargos.add(mapResultSetToCargo(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cargos;
+    }
+    
+    public List<Cargo> getCargosByCourier(int userId) {
+        // Kurye için kendisine atanan kargolar (basit sistem)
+        List<Cargo> cargos = new ArrayList<>();
+        String sql = "SELECT c.*, " +
+                    "sender.username as sender_name, receiver.username as receiver_name, " +
+                    "sender_addr.full_address as sender_address, receiver_addr.full_address as receiver_address, " +
+                    "cs.status_name as current_status " +
+                    "FROM Cargos c " +
+                    "LEFT JOIN Users sender ON c.sender_user_id = sender.user_id " +
+                    "LEFT JOIN Users receiver ON c.receiver_user_id = receiver.user_id " +
+                    "LEFT JOIN Addresses sender_addr ON sender.user_id = sender_addr.user_id " +
+                    "LEFT JOIN Addresses receiver_addr ON receiver.user_id = receiver_addr.user_id " +
+                    "LEFT JOIN CargoStatuses cs_latest ON c.cargo_id = cs_latest.cargo_id " +
+                    "LEFT JOIN Statuses cs ON cs_latest.status_type_id = cs.status_type_id " +
+                    "WHERE c.courier_user_id = ? " +
+                    "AND cs_latest.updated_date = (SELECT MAX(updated_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
+                    "ORDER BY c.shipping_date DESC";
+        
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                cargos.add(mapResultSetToCargo(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cargos;
+    }
+    
+    public boolean addCargoStatus(CargoStatus cargoStatus) {
+        String sql = "INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (?, ?, ?, ?)";
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, cargoStatus.getCargoId());
+            stmt.setInt(2, cargoStatus.getStatusTypeId());
+            stmt.setInt(3, cargoStatus.getUpdatedById());
+            stmt.setTimestamp(4, cargoStatus.getUpdatedDate());
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     private Cargo mapResultSetToCargo(ResultSet rs) throws SQLException {
         Cargo cargo = new Cargo();
         cargo.setCargoId(rs.getInt("cargo_id"));
@@ -408,7 +531,20 @@ public class CargoDAO {
         cargo.setDeliveryDate(rs.getTimestamp("delivery_date"));
         cargo.setSenderName(rs.getString("sender_name"));
         cargo.setReceiverName(rs.getString("receiver_name"));
+        cargo.setSenderAddress(rs.getString("sender_address"));
+        cargo.setReceiverAddress(rs.getString("receiver_address"));
         cargo.setCurrentStatus(rs.getString("current_status"));
+        
+        // Kurye atama alanı (nullable)
+        try {
+            int courierUserId = rs.getInt("courier_user_id");
+            if (!rs.wasNull()) {
+                cargo.setCourierUserId(courierUserId);
+            }
+        } catch (SQLException e) {
+            // Alan yoksa null olarak kalır
+        }
+        
         return cargo;
     }
 }

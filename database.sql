@@ -151,3 +151,5 @@ CREATE TABLE CargoStatuses (
     FOREIGN KEY (status_type_id) REFERENCES Statuses(status_type_id),
     FOREIGN KEY (updated_by_id) REFERENCES Users(user_id)
 );
+
+
