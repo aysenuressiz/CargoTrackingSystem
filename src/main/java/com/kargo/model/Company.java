@@ -7,7 +7,7 @@ public class Company {
     private int userId;
     private String companyName;
     private String taxNo;
-    private int addressId;
+    private Integer addressId;
     private String fullAddress;
     private String email;
     private String phone;
@@ -23,8 +23,8 @@ public class Company {
     public void setCompanyName(String companyName) { this.companyName = companyName; }
     public String getTaxNo() { return taxNo; }
     public void setTaxNo(String taxNo) { this.taxNo = taxNo; }
-    public int getAddressId() { return addressId; }
-    public void setAddressId(int addressId) { this.addressId = addressId; }
+    public Integer getAddressId() { return addressId; }
+    public void setAddressId(Integer addressId) { this.addressId = addressId; }
     public String getFullAddress() { return fullAddress; }
     public void setFullAddress(String fullAddress) { this.fullAddress = fullAddress; }
     public String getEmail() { return email; }

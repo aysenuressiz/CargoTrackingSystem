@@ -52,23 +52,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/customer/my-cargos">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/customer/cargos">
                                 <i class="fas fa-box"></i> Kargolarım
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/customer/send-cargo">
-                                <i class="fas fa-paper-plane"></i> Kargo Gönder
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/track">
                                 <i class="fas fa-search"></i> Kargo Takip
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/customer/addresses">
-                                <i class="fas fa-map-marker-alt"></i> Adreslerim
                             </a>
                         </li>
                     </ul>
@@ -77,8 +67,8 @@
                     
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/profile">
-                                <i class="fas fa-user-cog"></i> Profil
+                            <a class="nav-link" href="${pageContext.request.contextPath}/customer/profile">
+                                <i class="fas fa-user-cog"></i> Profil Bilgileri
                             </a>
                         </li>
                         <li class="nav-item">
