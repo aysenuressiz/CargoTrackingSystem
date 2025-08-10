@@ -82,7 +82,7 @@
                     
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/profile">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/company/profile">
                                 <i class="fas fa-user-cog"></i> Profil
                             </a>
                         </li>
