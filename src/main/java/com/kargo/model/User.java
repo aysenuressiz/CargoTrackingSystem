@@ -11,6 +11,8 @@ public class User {
     private int roleId;
     private Date createdAt;
     private String roleName;
+    private String firstName;
+    private String lastName;
     
     // Constructors
     public User() {}
@@ -86,5 +88,21 @@ public class User {
     
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+    
+    public String getFirstName() {
+        return firstName;
+    }
+    
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    public String getLastName() {
+        return lastName;
+    }
+    
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

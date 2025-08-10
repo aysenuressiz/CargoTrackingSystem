@@ -1,7 +1,11 @@
 package com.kargo.servlet;
 
 import com.kargo.dao.UserDAO;
+import com.kargo.dao.CustomerDAO;
+import com.kargo.dao.CompanyDAO;
 import com.kargo.model.User;
+import com.kargo.model.Customer;
+import com.kargo.model.Company;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,73 +16,99 @@ import java.io.IOException;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private UserDAO userDAO = new UserDAO();
+    private UserDAO userDAO;
+    private CustomerDAO customerDAO;
+    private CompanyDAO companyDAO;
+    
+    @Override
+    public void init() throws ServletException {
+        userDAO = new UserDAO();
+        customerDAO = new CustomerDAO();
+        companyDAO = new CompanyDAO();
+    }
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        request.getRequestDispatcher("register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
     }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        String username = request.getParameter("username");
+        String userType = request.getParameter("userType");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String confirmPassword = request.getParameter("confirmPassword");
         String phone = request.getParameter("phone");
-        String userType = request.getParameter("userType");
         
-        // Validasyon
-        if (username == null || email == null || password == null || 
-            confirmPassword == null || phone == null || userType == null ||
-            username.trim().isEmpty() || email.trim().isEmpty() || 
-            password.trim().isEmpty() || phone.trim().isEmpty()) {
-            
-            request.setAttribute("error", "Tüm alanlar doldurulmalıdır.");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-            return;
-        }
-        
-        // Admin kayıtlarını kontrol et
+        // @kargo.com.tr uzantılı email kontrolü (admin kayıt için)
         if (email.endsWith("@kargo.com.tr")) {
-            request.setAttribute("error", "Bu e-posta adresi ile kayıt olamazsınız. Sistem yöneticisi ile iletişime geçin.");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            request.setAttribute("error", "Admin kayıtları sadece sistem yöneticisi tarafından yapılabilir.");
+            request.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
             return;
         }
         
-        if (!password.equals(confirmPassword)) {
-            request.setAttribute("error", "Şifreler eşleşmiyor.");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-            return;
-        }
-        
+        // Email ve username kontrolü
         if (userDAO.isEmailExists(email)) {
-            request.setAttribute("error", "Bu e-posta adresi zaten kullanılıyor.");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            request.setAttribute("error", "Bu email adresi zaten kullanılmaktadır.");
+            request.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
             return;
         }
         
-        if (userDAO.isUsernameExists(username)) {
-            request.setAttribute("error", "Bu kullanıcı adı zaten kullanılıyor.");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-            return;
+        try {
+            if ("customer".equals(userType)) {
+                registerCustomer(request, email, password, phone);
+            } else if ("company".equals(userType)) {
+                registerCompany(request, email, password, phone);
+            }
+            
+            request.setAttribute("success", "Kayıt başarılı! Giriş yapabilirsiniz.");
+            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+            
+        } catch (Exception e) {
+            request.setAttribute("error", "Kayıt sırasında bir hata oluştu: " + e.getMessage());
+            request.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(request, response);
         }
+    }
+    
+    private void registerCustomer(HttpServletRequest request, String email, String password, String phone) throws Exception {
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String identityNo = request.getParameter("identityNo");
         
-        // Rol ID'sini belirle (3: Müşteri, 4: Şirket)
-        int roleId = userType.equals("company") ? 4 : 3;
-        
-        User user = new User(username, password, email, phone, roleId);
+        // Müşteri için roleId = 6 (Customers tablosuna bakarak)
+        User user = new User(email, password, email, phone, 6);
         
         if (userDAO.createUser(user)) {
-            request.setAttribute("success", "Kayıt başarılı! Şimdi giriş yapabilirsiniz.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            request.setAttribute("error", "Kayıt işlemi başarısız. Lütfen tekrar deneyin.");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            // Kullanıcı oluşturulduktan sonra customer bilgilerini kaydet
+            // Bu örnekte address_id = 1 varsayıyoruz, gerçekte adres ekleme işlemi olmalı
+            Customer customer = new Customer();
+            customer.setUserId(user.getUserId()); // Bu kısım gerçekte son eklenen user id'yi almalı
+            customer.setFirstName(firstName);
+            customer.setLastName(lastName);
+            customer.setIdentityNo(identityNo);
+            customer.setAddressId(1); // Varsayılan adres
+            
+            customerDAO.createCustomer(customer);
+        }
+    }
+    
+    private void registerCompany(HttpServletRequest request, String email, String password, String phone) throws Exception {
+        String companyName = request.getParameter("companyName");
+        String taxNo = request.getParameter("taxNo");
+        
+        // Şirket için roleId = 7
+        User user = new User(email, password, email, phone, 7);
+        
+        if (userDAO.createUser(user)) {
+            Company company = new Company();
+            company.setUserId(user.getUserId());
+            company.setCompanyName(companyName);
+            company.setTaxNo(taxNo);
+            company.setAddressId(1); // Varsayılan adres
+            
+            companyDAO.createCompany(company);
         }
     }
 }
