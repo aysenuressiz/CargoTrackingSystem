@@ -61,7 +61,7 @@
                     <p class="lead mb-4">Kargolarınızı gerçek zamanlı olarak takip edin. Müşteri ve şirket hesapları ile kolay erişim sağlayın.</p>
                     <div class="d-flex gap-3">
                         <a href="register" class="btn btn-light btn-lg">Kayıt Ol</a>
-                        <a href="login" class="btn btn-outline-light btn-lg">Giriş Yap</a>
+                        <a href="jsp/login" class="btn btn-outline-light btn-lg">Giriş Yap</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -138,8 +138,7 @@
                             <div class="mb-3">
                                 <i class="fas fa-users fa-3x text-info"></i>
                             </div>
-                            <h5 class="card-title">Müşteri & Şirket</h5>
-                            <p class="card-text">Hem bireysel hem de kurumsal hesap seçenekleri</p>
+								<h5 class="card-title">Müşteri &amp; Şirket</h5>                            <p class="card-text">Hem bireysel hem de kurumsal hesap seçenekleri</p>
                         </div>
                     </div>
                 </div>

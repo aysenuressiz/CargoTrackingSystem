@@ -16,7 +16,8 @@ import java.io.IOException;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
-    private UserDAO userDAO;
+	private static final long serialVersionUID = 1L;
+	private UserDAO userDAO;
     private CustomerDAO customerDAO;
     private CompanyDAO companyDAO;
     

@@ -1,6 +1,5 @@
 package com.kargo.servlet;
 
-import com.kargo.model.City;
 import com.kargo.model.District;
 import com.kargo.model.Neighborhood;
 import com.kargo.util.DatabaseUtil;

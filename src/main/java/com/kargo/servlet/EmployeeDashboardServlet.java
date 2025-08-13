@@ -22,7 +22,8 @@ import java.util.Map;
 
 @WebServlet("/employee/dashboard")
 public class EmployeeDashboardServlet extends HttpServlet {
-    private EmployeeDAO employeeDAO = new EmployeeDAO();
+	private static final long serialVersionUID = 1L;
+	private EmployeeDAO employeeDAO = new EmployeeDAO();
     private CargoDAO cargoDAO = new CargoDAO();
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 

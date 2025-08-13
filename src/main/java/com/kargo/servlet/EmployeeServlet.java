@@ -18,7 +18,8 @@ import java.util.List;
 
 @WebServlet("/employee/*")
 public class EmployeeServlet extends HttpServlet {
-    private EmployeeDAO employeeDAO;
+	private static final long serialVersionUID = 1L;
+	private EmployeeDAO employeeDAO;
     private UserDAO userDAO;
     private BranchDAO branchDAO;
     

@@ -21,7 +21,8 @@ import java.util.List;
 
 @WebServlet("/employee/status-update")
 public class EmployeeStatusUpdateServlet extends HttpServlet {
-    private CargoDAO cargoDAO = new CargoDAO();
+	private static final long serialVersionUID = 1L;
+	private CargoDAO cargoDAO = new CargoDAO();
     private EmployeeDAO employeeDAO = new EmployeeDAO();
     private StatusDAO statusDAO = new StatusDAO();
     

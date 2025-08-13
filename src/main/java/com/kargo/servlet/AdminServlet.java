@@ -12,8 +12,6 @@ import com.kargo.model.Employee;
 import com.kargo.model.Branch;
 import com.kargo.model.Cargo;
 import com.kargo.model.Position;
-import com.kargo.model.Customer;
-import com.kargo.model.Company;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +24,8 @@ import java.util.List;
 
 @WebServlet("/admin/*")
 public class AdminServlet extends HttpServlet {
-    private UserDAO userDAO = new UserDAO();
+	private static final long serialVersionUID = 1L;
+	private UserDAO userDAO = new UserDAO();
     private EmployeeDAO employeeDAO = new EmployeeDAO();
     private BranchDAO branchDAO = new BranchDAO();
     private CargoDAO cargoDAO = new CargoDAO();

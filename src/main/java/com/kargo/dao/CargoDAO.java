@@ -23,7 +23,7 @@ public class CargoDAO {
                     "LEFT JOIN CargoStatuses cs_latest ON c.cargo_id = cs_latest.cargo_id " +
                     "LEFT JOIN Statuses cs ON cs_latest.status_id = cs.status_id " +
                     "WHERE c.tracking_no = ? " +
-                    "AND cs_latest.updated_date = (SELECT MAX(updated_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id)";
+                    "AND cs_latest.update_date = (SELECT MAX(update_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id)";
         
         try (Connection conn = DatabaseUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -62,7 +62,7 @@ public class CargoDAO {
                     "JOIN Statuses s ON cs.status_id = s.status_id " +
                     "LEFT JOIN Users u ON cs.updated_by_id = u.user_id " +
                     "WHERE cs.cargo_id = ? " +
-                    "ORDER BY cs.updated_date DESC";
+                    "ORDER BY cs.update_date DESC";
         
         try (Connection conn = DatabaseUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -75,8 +75,8 @@ public class CargoDAO {
                 status.setStatusId(rs.getInt("status_id"));
                 status.setCargoId(rs.getInt("cargo_id"));
                 status.setStatusId(rs.getInt("status_id"));
-                status.setUpdatedById(rs.getInt("updated_by_id"));
-                status.setUpdatedDate(rs.getTimestamp("updated_date"));
+                status.setUpdatedById(rs.getInt("update_by_id"));
+                status.setUpdatedDate(rs.getTimestamp("update_date"));
                 status.setStatusName(rs.getString("status_name"));
                 status.setUpdatedByName(rs.getString("updated_by_name"));
                 statusHistory.add(status);
@@ -118,7 +118,7 @@ public class CargoDAO {
     }
     
     public boolean addCargoStatus(int cargoId, int statusId, int updatedById) {
-        String sql = "INSERT INTO CargoStatuses (cargo_id, status_id, updated_by_id, updated_date) VALUES (?, ?, ?, NOW())";
+        String sql = "INSERT INTO CargoStatuses (cargo_id, status_id, updated_by_id, update_date) VALUES (?, ?, ?, NOW())";
         
         try (Connection conn = DatabaseUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -145,7 +145,7 @@ public class CargoDAO {
                     "LEFT JOIN CargoStatuses cs_latest ON c.cargo_id = cs_latest.cargo_id " +
                     "LEFT JOIN Statuses cs ON cs_latest.status_id = cs.status_id " +
                     "WHERE (c.sender_user_id = ? OR c.receiver_user_id = ?) " +
-                    "AND cs_latest.updated_date = (SELECT MAX(updated_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
+                    "AND cs_latest.update_date = (SELECT MAX(update_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
                     "ORDER BY c.shipping_date DESC";
         
         try (Connection conn = DatabaseUtil.getConnection();
@@ -187,7 +187,7 @@ public class CargoDAO {
                     "LEFT JOIN Users receiver ON c.receiver_user_id = receiver.user_id " +
                     "LEFT JOIN CargoStatuses cs_latest ON c.cargo_id = cs_latest.cargo_id " +
                     "LEFT JOIN Statuses cs ON cs_latest.status_id = cs.status_id " +
-                    "WHERE cs_latest.updated_date = (SELECT MAX(updated_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
+                    "WHERE cs_latest.update_date = (SELECT MAX(update_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
                     "ORDER BY c.shipping_date DESC";
         
         try (Connection conn = DatabaseUtil.getConnection();
@@ -378,7 +378,7 @@ public class CargoDAO {
                     "LEFT JOIN Statuses cs ON cs_latest.status_type_id = cs.status_type_id " +
                     "WHERE (c.sender_user_id = ? OR c.receiver_user_id = ?) " +
                     "AND cs_latest.status_type_id = 5 " + // Teslim edildi
-                    "AND cs_latest.updated_date = (SELECT MAX(updated_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
+                    "AND cs_latest.update_date = (SELECT MAX(update_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
                     "ORDER BY c.shipping_date DESC";
         
         try (Connection conn = DatabaseUtil.getConnection();
@@ -412,7 +412,7 @@ public class CargoDAO {
                     "LEFT JOIN CargoStatuses cs_latest ON c.cargo_id = cs_latest.cargo_id " +
                     "LEFT JOIN Statuses cs ON cs_latest.status_type_id = cs.status_type_id " +
                     "WHERE c.sender_user_id IN (SELECT user_id FROM Employees WHERE branch_id = ?) " +
-                    "AND cs_latest.updated_date = (SELECT MAX(updated_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
+                    "AND cs_latest.update_date = (SELECT MAX(update_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
                     "ORDER BY c.shipping_date DESC";
         
         try (Connection conn = DatabaseUtil.getConnection();
@@ -450,7 +450,7 @@ public class CargoDAO {
                     "(SELECT address_id FROM Addresses WHERE city_id = " +
                     "(SELECT city_id FROM Addresses WHERE address_id = " +
                     "(SELECT address_id FROM Branches WHERE branch_id = ?)))))) " +
-                    "AND cs_latest.updated_date = (SELECT MAX(updated_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
+                    "AND cs_latest.update_date = (SELECT MAX(update_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
                     "ORDER BY c.shipping_date DESC";
         
         try (Connection conn = DatabaseUtil.getConnection();
@@ -484,7 +484,7 @@ public class CargoDAO {
                     "LEFT JOIN CargoStatuses cs_latest ON c.cargo_id = cs_latest.cargo_id " +
                     "LEFT JOIN Statuses cs ON cs_latest.status_type_id = cs.status_type_id " +
                     "WHERE c.courier_user_id = ? " +
-                    "AND cs_latest.updated_date = (SELECT MAX(updated_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
+                    "AND cs_latest.update_date = (SELECT MAX(update_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
                     "ORDER BY c.shipping_date DESC";
         
         try (Connection conn = DatabaseUtil.getConnection();

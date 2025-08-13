@@ -15,7 +15,8 @@ import java.util.List;
 
 @WebServlet("/branch/*")
 public class BranchServlet extends HttpServlet {
-    private BranchDAO branchDAO;
+	private static final long serialVersionUID = 1L;
+	private BranchDAO branchDAO;
     
     @Override
     public void init() throws ServletException {
