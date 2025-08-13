@@ -91,6 +91,7 @@ public class EmployeeStatusUpdateServlet extends HttpServlet {
             cargoStatus.setStatusTypeId(statusId);
             cargoStatus.setUpdatedById(user.getUserId());
             cargoStatus.setUpdatedDate(new Timestamp(System.currentTimeMillis()));
+            cargoStatus.setNotes(notes); // Notları ekle
             
             if (cargoDAO.addCargoStatus(cargoStatus)) {
                 request.setAttribute("success", "Kargo durumu başarıyla güncellendi.");

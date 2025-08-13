@@ -15,7 +15,7 @@ import java.util.List;
 public class AuthenticationFilter implements Filter {
     
     private static final List<String> PUBLIC_PATHS = Arrays.asList(
-        "/index.jsp", "/login", "/register", "/track", "/track-result.jsp", "/test",
+        "/index.jsp", "/login", "/register", "/track", "/track-result.jsp", "/test", "/db-test",
         "/css/", "/js/", "/images/", "/favicon.ico"
     );
     

@@ -3,6 +3,8 @@ package com.kargo.dao;
 import com.kargo.model.Address;
 import com.kargo.util.DatabaseUtil;
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class AddressDAO {
     
@@ -85,5 +87,31 @@ public class AddressDAO {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    public List<Address> getAddressesByUserId(int userId) {
+        List<Address> addresses = new ArrayList<>();
+        String sql = "SELECT * FROM Addresses WHERE user_id = ?";
+        
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Address address = new Address();
+                address.setAddressId(rs.getInt("address_id"));
+                address.setUserId(rs.getInt("user_id"));
+                address.setCityId(rs.getInt("city_id"));
+                address.setDistrictId(rs.getInt("district_id"));
+                address.setNeighborhoodId(rs.getInt("neighborhood_id"));
+                address.setFullAddress(rs.getString("full_address"));
+                addresses.add(address);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return addresses;
     }
 }

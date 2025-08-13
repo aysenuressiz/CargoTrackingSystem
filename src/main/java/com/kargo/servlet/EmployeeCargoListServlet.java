@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-@WebServlet("/employee/dashboard")
-public class EmployeeDashboardServlet extends HttpServlet {
+@WebServlet("/employee/cargo-list")
+public class EmployeeCargoListServlet extends HttpServlet {
     
     private CargoDAO cargoDAO = new CargoDAO();
     private EmployeeDAO employeeDAO = new EmployeeDAO();
@@ -39,49 +39,43 @@ public class EmployeeDashboardServlet extends HttpServlet {
             Employee employee = employeeDAO.getEmployeeByUserId(user.getUserId());
             
             if (employee == null) {
-                request.setAttribute("error", "Çalışan bilgileriniz bulunamadı. Lütfen yönetici ile iletişime geçin.");
-                request.getRequestDispatcher("/WEB-INF/jsp/employee/dashboard.jsp").forward(request, response);
+                request.setAttribute("error", "Çalışan bilgileriniz bulunamadı.");
+                response.sendRedirect(request.getContextPath() + "/employee/dashboard");
                 return;
             }
             
-            // Çalışanın işlediği kargoları al (eğer çalışan ID'si varsa)
             List<Cargo> cargos = new ArrayList<>();
-            if (employee.getEmployeeId() > 0) {
-                cargos = cargoDAO.getCargosByEmployeeId(employee.getEmployeeId());
-            }
             
-            // İstatistikleri hesapla
-            int totalCargos = cargos.size();
-            int deliveredCargos = (int) cargos.stream()
-                .filter(cargo -> "Teslim Edildi".equals(cargo.getCurrentStatus()))
-                .count();
-            int inTransitCargos = totalCargos - deliveredCargos;
-            
-            // Pozisyon bazlı ek veriler
-            int todayCargos = 0;
-            int pendingCargos = 0;
-            
-            // Pozisyon bazlı kargo sayıları
+            // Pozisyon bazlı kargo listesi
             if (employee.getPositionId() == 5) { // Kurye
                 cargos = cargoDAO.getCargosByCourier(user.getUserId());
             } else if (employee.getPositionId() == 2) { // Şube Müdürü
                 cargos = cargoDAO.getCargosByBranch(employee.getBranchId());
+            } else if (employee.getPositionId() == 4) { // Bölge Sorumlusu
+                cargos = cargoDAO.getCargosByRegion(employee.getBranchId());
+            } else {
+                // Diğer pozisyonlar için tüm kargolar
+                cargos = cargoDAO.getAllCargos();
+            }
+            
+            // Filtreleme
+            String statusFilter = request.getParameter("status");
+            if (statusFilter != null && !statusFilter.isEmpty()) {
+                cargos = cargos.stream()
+                    .filter(cargo -> statusFilter.equals(cargo.getCurrentStatus()))
+                    .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
             }
             
             request.setAttribute("employee", employee);
             request.setAttribute("cargos", cargos);
-            request.setAttribute("totalCargos", totalCargos);
-            request.setAttribute("deliveredCargos", deliveredCargos);
-            request.setAttribute("inTransitCargos", inTransitCargos);
-            request.setAttribute("todayCargos", todayCargos);
-            request.setAttribute("pendingCargos", pendingCargos);
+            request.setAttribute("statusFilter", statusFilter);
             
-            request.getRequestDispatcher("/WEB-INF/jsp/employee/dashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/employee/cargo-list.jsp").forward(request, response);
             
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "Dashboard yüklenirken hata oluştu: " + e.getMessage());
-            request.getRequestDispatcher("/WEB-INF/jsp/employee/dashboard.jsp").forward(request, response);
+            request.setAttribute("error", "Kargo listesi yüklenirken hata oluştu: " + e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/employee/dashboard");
         }
     }
     

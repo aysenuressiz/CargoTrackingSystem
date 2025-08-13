@@ -78,8 +78,8 @@ public class RegisterServlet extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String identityNo = request.getParameter("identityNo");
         
-        // Müşteri için roleId = 6 (Customers tablosuna bakarak)
-        User user = new User(email, password, email, phone, 6);
+        // Müşteri için roleId = 2 (Roles tablosuna göre)
+        User user = new User(email, password, email, phone, 2);
         
         if (userDAO.createUser(user)) {
             // Kullanıcı oluşturulduktan sonra customer bilgilerini kaydet
@@ -99,8 +99,8 @@ public class RegisterServlet extends HttpServlet {
         String companyName = request.getParameter("companyName");
         String taxNo = request.getParameter("taxNo");
         
-        // Şirket için roleId = 7
-        User user = new User(email, password, email, phone, 7);
+        // Şirket için roleId = 3 (Roles tablosuna göre)
+        User user = new User(email, password, email, phone, 3);
         
         if (userDAO.createUser(user)) {
             Company company = new Company();

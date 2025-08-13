@@ -125,6 +125,11 @@ public class CompanyBulkSendServlet extends HttpServlet {
                 receiver.setPhone(receiverPhone);
                 receiver.setRoleId(2); // Customer role
                 
+                // Set receiver name if provided
+                if (receiverName != null && !receiverName.trim().isEmpty()) {
+                    receiver.setUsername(receiverName.replaceAll("\\s+", "_") + "_" + System.currentTimeMillis());
+                }
+                
                 // Generate a temporary password
                 String tempPassword = "TempPass" + System.currentTimeMillis();
                 receiver.setPassword(tempPassword); // This should be hashed in production

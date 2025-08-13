@@ -10,6 +10,36 @@ import java.util.List;
 
 public class CargoDAO {
     
+    public Cargo getCargoById(int cargoId) {
+        String sql = "SELECT c.*, " +
+                    "sender.username as sender_name, receiver.username as receiver_name, " +
+                    "sender_addr.full_address as sender_address, receiver_addr.full_address as receiver_address, " +
+                    "cs.status_name as current_status " +
+                    "FROM Cargos c " +
+                    "LEFT JOIN Users sender ON c.sender_user_id = sender.user_id " +
+                    "LEFT JOIN Users receiver ON c.receiver_user_id = receiver.user_id " +
+                    "LEFT JOIN Addresses sender_addr ON sender.user_id = sender_addr.user_id " +
+                    "LEFT JOIN Addresses receiver_addr ON receiver.user_id = receiver_addr.user_id " +
+                    "LEFT JOIN CargoStatuses cs_latest ON c.cargo_id = cs_latest.cargo_id " +
+                    "LEFT JOIN Statuses cs ON cs_latest.status_id = cs.status_id " +
+                    "WHERE c.cargo_id = ? " +
+                    "AND cs_latest.update_date = (SELECT MAX(update_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id)";
+        
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, cargoId);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return mapResultSetToCargo(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public Cargo getCargoByTrackingNo(String trackingNo) {
         String sql = "SELECT c.*, " +
                     "sender.username as sender_name, receiver.username as receiver_name, " +
@@ -32,22 +62,7 @@ public class CargoDAO {
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
-                Cargo cargo = new Cargo();
-                cargo.setCargoId(rs.getInt("cargo_id"));
-                cargo.setTrackingNo(rs.getString("tracking_no"));
-                cargo.setSenderUserId(rs.getInt("sender_user_id"));
-                cargo.setReceiverUserId(rs.getInt("receiver_user_id"));
-                cargo.setWeight(rs.getBigDecimal("weight"));
-                cargo.setDescription(rs.getString("desi"));
-                cargo.setContentDescription(rs.getString("content_description"));
-                cargo.setShippingDate(rs.getTimestamp("shipping_date"));
-                cargo.setDeliveryDate(rs.getTimestamp("delivery_date"));
-                cargo.setSenderName(rs.getString("sender_name"));
-                cargo.setReceiverName(rs.getString("receiver_name"));
-                cargo.setSenderAddress(rs.getString("sender_address"));
-                cargo.setReceiverAddress(rs.getString("receiver_address"));
-                cargo.setCurrentStatus(rs.getString("current_status"));
-                return cargo;
+                return mapResultSetToCargo(rs);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -218,7 +233,6 @@ public class CargoDAO {
     
     public String generateTrackingNumber() {
         String prefix = "KT";
-        String datePart = String.valueOf(System.currentTimeMillis()).substring(5);
         
         // Son kargo numarasını al ve +1 yap
         String sql = "SELECT MAX(CAST(SUBSTRING(tracking_no, 3) AS UNSIGNED)) as max_num FROM Cargos WHERE tracking_no LIKE 'KT%'";

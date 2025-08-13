@@ -2,6 +2,7 @@ package com.kargo.model;
 
 public class Address {
     private int addressId;
+    private int userId;
     private int cityId;
     private int districtId;
     private int neighborhoodId;
@@ -25,6 +26,14 @@ public class Address {
     
     public void setAddressId(int addressId) {
         this.addressId = addressId;
+    }
+    
+    public int getUserId() {
+        return userId;
+    }
+    
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
     
     public int getCityId() {

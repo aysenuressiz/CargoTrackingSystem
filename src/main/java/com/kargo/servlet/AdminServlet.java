@@ -5,8 +5,6 @@ import com.kargo.dao.EmployeeDAO;
 import com.kargo.dao.BranchDAO;
 import com.kargo.dao.CargoDAO;
 import com.kargo.dao.PositionDAO;
-import com.kargo.dao.CustomerDAO;
-import com.kargo.dao.CompanyDAO;
 import com.kargo.model.User;
 import com.kargo.model.Employee;
 import com.kargo.model.Branch;
@@ -25,13 +23,11 @@ import java.util.List;
 @WebServlet("/admin/*")
 public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserDAO userDAO = new UserDAO();
+	    private UserDAO userDAO = new UserDAO();
     private EmployeeDAO employeeDAO = new EmployeeDAO();
     private BranchDAO branchDAO = new BranchDAO();
     private CargoDAO cargoDAO = new CargoDAO();
     private PositionDAO positionDAO = new PositionDAO();
-    private CustomerDAO customerDAO = new CustomerDAO();
-    private CompanyDAO companyDAO = new CompanyDAO();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 

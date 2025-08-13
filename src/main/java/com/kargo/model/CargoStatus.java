@@ -10,6 +10,7 @@ public class CargoStatus {
     private Timestamp updatedDate;
     private String statusName;
     private String updatedByName;
+    private String notes;
     
     public CargoStatus() {}
     
@@ -73,5 +74,13 @@ public class CargoStatus {
     
     public void setUpdatedByName(String updatedByName) {
         this.updatedByName = updatedByName;
+    }
+    
+    public String getNotes() {
+        return notes;
+    }
+    
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

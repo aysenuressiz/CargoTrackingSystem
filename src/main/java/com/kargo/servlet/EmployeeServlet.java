@@ -170,8 +170,10 @@ public class EmployeeServlet extends HttpServlet {
             throws ServletException, IOException {
         int employeeId = Integer.parseInt(request.getParameter("id"));
         // Employee bilgilerini getir ve form göster
+        Employee employee = employeeDAO.getEmployeeById(employeeId);
         List<Branch> branches = branchDAO.getAllBranches();
         request.setAttribute("branches", branches);
+        request.setAttribute("employee", employee);
         request.setAttribute("employeeId", employeeId);
         request.getRequestDispatcher("/WEB-INF/jsp/employee/edit.jsp").forward(request, response);
     }
@@ -184,9 +186,30 @@ public class EmployeeServlet extends HttpServlet {
     
     private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        int employeeId = Integer.parseInt(request.getParameter("id"));
-        // Employee silme işlemi
-        response.sendRedirect(request.getContextPath() + "/employee/dashboard?deleted=1");
+        try {
+            int employeeId = Integer.parseInt(request.getParameter("id"));
+            
+            // Employee bilgilerini al
+            Employee employee = employeeDAO.getEmployeeById(employeeId);
+            if (employee != null) {
+                // Önce employee kaydını sil
+                if (employeeDAO.deleteEmployee(employeeId)) {
+                    // Sonra user kaydını sil
+                    if (userDAO.deleteUser(employee.getUserId())) {
+                        response.sendRedirect(request.getContextPath() + "/employee/dashboard?deleted=1");
+                    } else {
+                        response.sendRedirect(request.getContextPath() + "/employee/dashboard?error=user_delete_failed");
+                    }
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/employee/dashboard?error=employee_delete_failed");
+                }
+            } else {
+                response.sendRedirect(request.getContextPath() + "/employee/dashboard?error=employee_not_found");
+            }
+        } catch (Exception e) {
+            request.setAttribute("error", "Çalışan silinirken hata oluştu: " + e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/employee/dashboard");
+        }
     }
     
     private int getRoleIdByPosition(int positionId) {

@@ -103,7 +103,7 @@ public class BranchServlet extends HttpServlet {
         
         try {
             String branchName = request.getParameter("branchName");
-            String address = request.getParameter("address");
+            // Not: Address parametresi şimdilik kullanılmıyor, gelecek versiyonda adres tablosu ile entegre edilecek
             
             Branch branch = new Branch();
             branch.setBranchName(branchName);

@@ -223,4 +223,32 @@ public class UserDAO {
         }
         return null;
     }
+    
+    public User getUserByUsername(String username) {
+        String sql = "SELECT u.*, r.role_name FROM Users u " +
+                    "JOIN Roles r ON u.role_id = r.role_id " +
+                    "WHERE u.username = ?";
+        
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                User user = new User();
+                user.setUserId(rs.getInt("user_id"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPhone(rs.getString("phone"));
+                user.setRoleId(rs.getInt("role_id"));
+                user.setRoleName(rs.getString("role_name"));
+                user.setCreatedAt(rs.getTimestamp("created_at"));
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
