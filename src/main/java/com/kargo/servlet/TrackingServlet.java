@@ -25,7 +25,7 @@ public class TrackingServlet extends HttpServlet {
         
         if (trackingNo == null || trackingNo.trim().isEmpty()) {
             request.setAttribute("error", "Lütfen geçerli bir takip numarası girin.");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
             return;
         }
         
@@ -40,17 +40,17 @@ public class TrackingServlet extends HttpServlet {
                 request.setAttribute("cargo", cargo);
                 request.setAttribute("statusHistory", statusHistory);
                 request.setAttribute("trackingNo", trackingNo);
-                request.getRequestDispatcher("track-result.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/jsp/track-result.jsp").forward(request, response);
             } else {
                 request.setAttribute("error", "Bu takip numarasına ait kargo bulunamadı: " + trackingNo);
                 request.setAttribute("trackingNo", trackingNo);
-                request.getRequestDispatcher("track-result.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/jsp/track-result.jsp").forward(request, response);
             }
             
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "Takip işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin.");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
     
