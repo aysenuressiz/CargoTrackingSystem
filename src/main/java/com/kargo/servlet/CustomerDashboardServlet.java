@@ -1,9 +1,9 @@
 package com.kargo.servlet;
 
 import com.kargo.dao.CargoDAO;
-import com.kargo.dao.EmployeeDAO;
+import com.kargo.dao.CustomerDAO;
 import com.kargo.model.Cargo;
-import com.kargo.model.Employee;
+import com.kargo.model.Customer;
 import com.kargo.model.User;
 
 import javax.servlet.ServletException;
@@ -15,11 +15,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/employee/dashboard")
-public class EmployeeDashboardServlet extends HttpServlet {
+@WebServlet("/customer/dashboard")
+public class CustomerDashboardServlet extends HttpServlet {
     
     private CargoDAO cargoDAO = new CargoDAO();
-    private EmployeeDAO employeeDAO = new EmployeeDAO();
+    private CustomerDAO customerDAO = new CustomerDAO();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -34,11 +34,11 @@ public class EmployeeDashboardServlet extends HttpServlet {
         }
         
         try {
-            // Çalışan bilgilerini al
-            Employee employee = employeeDAO.getEmployeeByUserId(user.getUserId());
+            // Müşteri bilgilerini al
+            Customer customer = customerDAO.getCustomerByUserId(user.getUserId());
             
-            // Çalışanın işlediği kargoları al
-            List<Cargo> cargos = cargoDAO.getCargosByEmployeeId(employee.getEmployeeId());
+            // Müşterinin kargolarını al
+            List<Cargo> cargos = cargoDAO.getCargosByUserId(user.getUserId());
             
             // İstatistikleri hesapla
             int totalCargos = cargos.size();
@@ -47,18 +47,18 @@ public class EmployeeDashboardServlet extends HttpServlet {
                 .count();
             int inTransitCargos = totalCargos - deliveredCargos;
             
-            request.setAttribute("employee", employee);
+            request.setAttribute("customer", customer);
             request.setAttribute("cargos", cargos);
             request.setAttribute("totalCargos", totalCargos);
             request.setAttribute("deliveredCargos", deliveredCargos);
             request.setAttribute("inTransitCargos", inTransitCargos);
             
-            request.getRequestDispatcher("/WEB-INF/jsp/employee/dashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/customer/dashboard.jsp").forward(request, response);
             
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "Dashboard yüklenirken hata oluştu: " + e.getMessage());
-            request.getRequestDispatcher("/WEB-INF/jsp/employee/dashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/customer/dashboard.jsp").forward(request, response);
         }
     }
     

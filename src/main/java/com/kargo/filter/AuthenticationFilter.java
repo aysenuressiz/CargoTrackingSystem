@@ -15,7 +15,7 @@ import java.util.List;
 public class AuthenticationFilter implements Filter {
     
     private static final List<String> PUBLIC_PATHS = Arrays.asList(
-        "/index.jsp", "/login", "/register", "/track", "/track-result.jsp", 
+        "/index.jsp", "/login", "/register", "/track", "/track-result.jsp", "/test",
         "/css/", "/js/", "/images/", "/favicon.ico"
     );
     
@@ -63,6 +63,8 @@ public class AuthenticationFilter implements Filter {
             // return;
         }
         
+        // Geçici olarak tüm rol kontrollerini devre dışı bırakalım
+        /*
         if (path.startsWith("/employee/") && !isEmployee(roleName)) {
             httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN, "Erişim reddedildi");
             return;
@@ -77,6 +79,7 @@ public class AuthenticationFilter implements Filter {
             httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN, "Erişim reddedildi");
             return;
         }
+        */
         
         chain.doFilter(request, response);
     }

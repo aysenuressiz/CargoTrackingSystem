@@ -547,4 +547,36 @@ public class CargoDAO {
         
         return cargo;
     }
+    
+    public List<Cargo> getCargosByEmployeeId(int employeeId) {
+        List<Cargo> cargos = new ArrayList<>();
+        String sql = "SELECT c.*, " +
+                    "sender.username as sender_name, receiver.username as receiver_name, " +
+                    "sender_addr.full_address as sender_address, receiver_addr.full_address as receiver_address, " +
+                    "cs.status_name as current_status " +
+                    "FROM Cargos c " +
+                    "LEFT JOIN Users sender ON c.sender_user_id = sender.user_id " +
+                    "LEFT JOIN Users receiver ON c.receiver_user_id = receiver.user_id " +
+                    "LEFT JOIN Addresses sender_addr ON sender.user_id = sender_addr.user_id " +
+                    "LEFT JOIN Addresses receiver_addr ON receiver.user_id = receiver_addr.user_id " +
+                    "LEFT JOIN CargoStatuses cs_latest ON c.cargo_id = cs_latest.cargo_id " +
+                    "LEFT JOIN Statuses cs ON cs_latest.status_id = cs.status_id " +
+                    "WHERE cs_latest.updated_by_id = ? " +
+                    "AND cs_latest.update_date = (SELECT MAX(update_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
+                    "ORDER BY c.shipping_date DESC";
+        
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, employeeId);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                cargos.add(mapResultSetToCargo(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cargos;
+    }
 }
