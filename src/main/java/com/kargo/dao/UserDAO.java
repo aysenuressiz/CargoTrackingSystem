@@ -52,8 +52,9 @@ public class UserDAO {
             
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                String hashedPassword = rs.getString("passw");
-                if (BCrypt.checkpw(password, hashedPassword)) {
+                String storedPassword = rs.getString("passw");
+                // Geçici olarak düz metin karşılaştırması yapıyoruz
+                if (password.equals(storedPassword)) {
                     User user = new User();
                     user.setUserId(rs.getInt("user_id"));
                     user.setUsername(rs.getString("username"));
