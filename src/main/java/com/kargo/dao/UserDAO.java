@@ -15,7 +15,7 @@ public class UserDAO {
     }
     
     public int createUserAndGetId(User user) {
-        String sql = "INSERT INTO Users (username, password, email, phone, role_id, created_at) VALUES (?, ?, ?, ?, ?, NOW())";
+        String sql = "INSERT INTO Users (username, passw, email, phone, role_id, created_at) VALUES (?, ?, ?, ?, ?, NOW())";
         
         try (Connection conn = DatabaseUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -52,7 +52,7 @@ public class UserDAO {
             
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                String hashedPassword = rs.getString("password");
+                String hashedPassword = rs.getString("passw");
                 if (BCrypt.checkpw(password, hashedPassword)) {
                     User user = new User();
                     user.setUserId(rs.getInt("user_id"));
