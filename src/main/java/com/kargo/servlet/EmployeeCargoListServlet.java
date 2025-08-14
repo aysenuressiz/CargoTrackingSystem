@@ -51,8 +51,8 @@ public class EmployeeCargoListServlet extends HttpServlet {
                 cargos = cargoDAO.getCargosByCourier(user.getUserId());
             } else if (employee.getPositionId() == 2) { // Şube Müdürü
                 cargos = cargoDAO.getCargosByBranch(employee.getBranchId());
-            } else if (employee.getPositionId() == 4) { // Bölge Sorumlusu
-                cargos = cargoDAO.getCargosByRegion(employee.getBranchId());
+                    } else if (employee.getPositionId() == 4) { // Şube Personeli
+            cargos = cargoDAO.getCargosByBranch(employee.getBranchId());
             } else {
                 // Diğer pozisyonlar için tüm kargolar
                 cargos = cargoDAO.getAllCargos();

@@ -78,6 +78,15 @@
                             </a>
                         </li>
                         
+                                                 <!-- Kurye Atama - Şube Müdürü, Depo Görevlisi ve Şube Personeli -->
+                         <c:if test="${sessionScope.employee.positionId == 2 || sessionScope.employee.positionId == 3 || sessionScope.employee.positionId == 4}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/employee/courier-assignment">
+                                    <i class="fas fa-user-tie"></i> Kurye Atama
+                                </a>
+                            </li>
+                        </c:if>
+                        
                         
                         
                         <!-- Kargo Takip - Tüm pozisyonlar -->
@@ -87,8 +96,8 @@
                             </a>
                         </li>
                         
-                        <!-- Genel Müdür ve Bölge Sorumlusu için Şube Yönetimi -->
-                        <c:if test="${sessionScope.employee.positionId == 1 || sessionScope.employee.positionId == 4}">
+                                                 <!-- Genel Müdür için Şube Yönetimi -->
+                         <c:if test="${sessionScope.employee.positionId == 1}">
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/employee/branches">
                                     <i class="fas fa-building"></i> Şube Yönetimi
@@ -123,8 +132,8 @@
                             </li>
                         </c:if>
                         
-                        <!-- Raporlar - Genel Müdür, Bölge Sorumlusu, Şube Müdürü -->
-                        <c:if test="${sessionScope.employee.positionId == 1 || sessionScope.employee.positionId == 4 || sessionScope.employee.positionId == 2}">
+                                                 <!-- Raporlar - Genel Müdür, Şube Müdürü -->
+                         <c:if test="${sessionScope.employee.positionId == 1 || sessionScope.employee.positionId == 2}">
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/employee/reports">
                                     <i class="fas fa-chart-line"></i> Raporlar
@@ -188,9 +197,9 @@
                         <c:when test="${sessionScope.employee.positionId == 3}">
                             <p class="mb-0">Depo Görevlisi olarak kargo teslim alma, hazırlama ve kuryelere teslim etme işlemlerini gerçekleştirebilirsiniz.</p>
                         </c:when>
-                        <c:when test="${sessionScope.employee.positionId == 4}">
-                            <p class="mb-0">Bölge Sorumlusu olarak bölgenizdeki şubeleri denetleyebilir ve bölgesel raporları inceleyebilirsiniz.</p>
-                        </c:when>
+                                                 <c:when test="${sessionScope.employee.positionId == 4}">
+                             <p class="mb-0">Şube Personeli olarak şube içi kargo işlemlerini yönetebilir ve kurye atamalarını yapabilirsiniz.</p>
+                         </c:when>
                         <c:when test="${sessionScope.employee.positionId == 5}">
                             <p class="mb-0">Kurye olarak size atanan teslimatları görüntüleyebilir ve teslim durumlarını güncelleyebilirsiniz.</p>
                         </c:when>
@@ -436,8 +445,8 @@
                                         <i class="fas fa-search"></i> Kargo Ara
                                     </a>
                                     
-                                    <!-- Pozisyon bazlı özel butonlar -->
-                                    <c:if test="${sessionScope.employee.positionId == 1 || sessionScope.employee.positionId == 4 || sessionScope.employee.positionId == 2}">
+                                                                         <!-- Pozisyon bazlı özel butonlar -->
+                                     <c:if test="${sessionScope.employee.positionId == 1 || sessionScope.employee.positionId == 2}">
                                         <a href="${pageContext.request.contextPath}/employee/reports" class="btn btn-warning">
                                             <i class="fas fa-file-alt"></i> Rapor Oluştur
                                         </a>

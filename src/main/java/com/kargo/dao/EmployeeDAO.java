@@ -245,9 +245,9 @@ public class EmployeeDAO {
         return employee != null && employee.getPositionId() == 3; // Depo Görevlisi
     }
     
-    public boolean isRegionalManager(int userId) {
+    public boolean isBranchStaff(int userId) {
         Employee employee = getEmployeeByUserId(userId);
-        return employee != null && employee.getPositionId() == 4; // Bölge Sorumlusu
+        return employee != null && employee.getPositionId() == 4; // Şube Personeli
     }
     
     public boolean isCourier(int userId) {
@@ -256,15 +256,15 @@ public class EmployeeDAO {
     }
     
     public boolean canManageAllBranches(int userId) {
-        return isGeneralManager(userId) || isRegionalManager(userId);
+        return isGeneralManager(userId);
     }
     
     public boolean canManageBranch(int userId, int branchId) {
         Employee employee = getEmployeeByUserId(userId);
         if (employee == null) return false;
         
-        // Genel Müdür ve Bölge Sorumlusu tüm şubeleri yönetebilir
-        if (isGeneralManager(userId) || isRegionalManager(userId)) {
+        // Genel Müdür tüm şubeleri yönetebilir
+        if (isGeneralManager(userId)) {
             return true;
         }
         
@@ -285,15 +285,15 @@ public class EmployeeDAO {
     }
     
     public boolean canViewAllReports(int userId) {
-        return isGeneralManager(userId) || isRegionalManager(userId);
+        return isGeneralManager(userId);
     }
     
     public boolean canViewBranchReports(int userId, int branchId) {
         Employee employee = getEmployeeByUserId(userId);
         if (employee == null) return false;
         
-        // Genel Müdür ve Bölge Sorumlusu tüm raporları görebilir
-        if (isGeneralManager(userId) || isRegionalManager(userId)) {
+        // Genel Müdür tüm raporları görebilir
+        if (isGeneralManager(userId)) {
             return true;
         }
         

@@ -115,8 +115,8 @@ public class EmployeeStatusUpdateServlet extends HttpServlet {
                 return cargoDAO.getCargosByBranch(employee.getBranchId());
             case 3: // Depo Görevlisi - Şubedeki kargolar
                 return cargoDAO.getCargosByBranch(employee.getBranchId());
-            case 4: // Bölge Sorumlusu - Bölgedeki kargolar
-                return cargoDAO.getCargosByRegion(employee.getBranchId());
+            case 4: // Şube Personeli - Şubedeki kargolar
+                return cargoDAO.getCargosByBranch(employee.getBranchId());
             case 5: // Kurye - Kendisine atanan kargolar
                 return cargoDAO.getCargosByCourier(employee.getUserId());
             default:

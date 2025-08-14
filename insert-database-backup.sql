@@ -303,16 +303,16 @@ INSERT INTO Admins (admin_id, user_id, first_name, last_name) VALUES
 
 -- 6. Addresses Tablosu 150 kayıt
 
-INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (1, 340, 1, 'GÖKÇELİ MAH. Atatürk Caddesi No: 15, Adana');
-INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (20, 563, 169, 'YARIMOĞLU MAH. İnönü Sokak No: 8, Bursa');
-INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (22, 691, 187, 'KURTULUŞ MAH. Cumhuriyet Caddesi No: 23, Eskişehir');
-INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (24, 505, 99, 'KIRHASAN MAH. Fatih Sokak No: 12, Gaziantep');
-INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (1, 340, 5, 'KAZANCI MAH. Hürriyet Caddesi No: 45, Adana');
-INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (20, 563, 114, 'ÇANDIK MAH. Zafer Sokak No: 67, Bursa');
-INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (19, 691, 174, 'AKÇATEKİR MAH. Barış Caddesi No: 34, Çorum');
-INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (22, 699, 195, 'ÇERALAN MAH. Gazi Sokak No: 89, Eskişehir');
-INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (22, 453, 23, 'SAYCA MAH. Vatan Caddesi No: 56, Eskişehir');
-INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (19, 713, 220, 'BEYCELİ MAH. Şehitler Sokak No: 78, Çorum');
+INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (1, 340, 1, 'GÖKÇELİ MAH. Akpınar Sokak No: 12');
+INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (20, 563, 169, 'YARIMOĞLU MAH. Orhangazi Caddesi No: 45');
+INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (22, 691, 187, 'KURTULUŞ MAH. Zafer Sokak No: 7');
+INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (24, 505, 99, 'KIRHASAN MAH. Cumhuriyet Caddesi No: 23');
+INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (1, 340, 5, 'KAZANCI MAH. Çiçekli Sokak No: 67');
+INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (20, 563, 114, 'ÇANDIK MAH. Fevzi Çakmak Sokak No: 89');
+INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (19, 691, 174, 'AKÇATEKİR MAH. İnönü Caddesi No: 1');
+INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (22, 699, 195, 'ÇERALAN MAH. Bahar Sokak No: 33');
+INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (22, 453, 23, 'SAYCA MAH. Güzeldere Caddesi No: 5');
+INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (19, 713, 220, 'BEYCELİ MAH. Çamlıca Sokak No: 2');
 INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (22, 495, 41, 'BARAKDAĞI MAH. Huzur Sokak No: 11');
 INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (24, 505, 91, 'HACIHASAN MAH. Lale Sokak No: 29');
 INSERT INTO Addresses (city_id, district_id, neighborhood_id, full_address) VALUES (20, 563, 108, 'ACARMANTAŞ MAH. Akasya Sokak No: 76');
@@ -1197,16 +1197,16 @@ INSERT INTO Cargos (tracking_no, sender_user_id, receiver_user_id, weight, desi,
 ('TRK-000428', 50, 130, 8.00, 3, 'Kıyafet', '2023-08-26 15:00:00', '2023-08-29 10:00:00'),
 ('TRK-000429', 151, 15, 40.00, 16, 'Belgeler', '2023-09-09 11:00:00', '2023-09-14 15:00:00'),
 ('TRK-000430', 95, 115, 12.00, 4, 'Kitap', '2023-10-21 13:00:00', '2023-10-28 14:00:00'),
-('TRK-000431', 120, 40, 2.50, 3, 'Elektronik Cihaz', '2023-11-26 10:00:00', '2023-11-29 16:00:00'),
-('TRK-000432', 80, 100, 15.00, 8, 'Ev Eşyası', '2023-12-08 14:00:00', '2023-12-15 17:00:00'),
-('TRK-000433', 105, 60, 1.20, 2, 'Kıyafet', '2024-01-14 10:00:00', '2024-01-17 11:00:00'),
-('TRK-000434', 153, 70, 0.50, 1, 'Belgeler', '2024-02-26 15:00:00', '2024-03-03 10:00:00'),
-('TRK-000435', 4, 130, 3.80, 4, 'Kitap', '2024-04-18 16:00:00', '2024-04-23 12:00:00'),
-('TRK-000436', 15, 90, 8.50, 6, 'Elektronik Cihaz', '2024-05-24 11:00:00', '2024-05-31 15:00:00'),
-('TRK-000437', 125, 45, 12.00, 5, 'Ev Eşyası', '2024-06-16 13:00:00', '2024-06-23 10:00:00'),
-('TRK-000438', 5, 153, 0.80, 1, 'Kıyafet', '2024-07-31 14:30:00', '2024-08-02 11:00:00'),
-('TRK-000439', 111, 4, 0.30, 1, 'Belgeler', '2024-08-14 09:00:00', '2024-08-19 16:00:00'),
-('TRK-000440', 88, 140, 2.20, 3, 'Kitap', '2024-09-21 17:00:00', '2024-09-24 13:00:00'),
+('TRK-000431', 120, 40, 7.00, 2, 'Elektronik Cihaz', '2023-11-26 10:00:00', '2023-11-29 16:00:00'),
+('TRK-000432', 80, 100, 45.00, 20, 'Ev Eşyası', '2023-12-08 14:00:00', '2023-12-15 17:00:00'),
+('TRK-000433', 105, 60, 3.50, 1, 'Kıyafet', '2024-01-14 10:00:00', '2024-01-17 11:00:00'),
+('TRK-000434', 153, 70, 52.00, 21, 'Belgeler', '2024-02-26 15:00:00', '2024-03-03 10:00:00'),
+('TRK-000435', 4, 130, 12.50, 5, 'Kitap', '2024-04-18 16:00:00', '2024-04-23 12:00:00'),
+('TRK-000436', 15, 90, 31.00, 13, 'Elektronik Cihaz', '2024-05-24 11:00:00', '2024-05-31 15:00:00'),
+('TRK-000437', 125, 45, 10.00, 4, 'Ev Eşyası', '2024-06-16 13:00:00', '2024-06-23 10:00:00'),
+('TRK-000438', 5, 153, 1.75, 1, 'Kıyafet', '2024-07-31 14:30:00', '2024-08-02 11:00:00'),
+('TRK-000439', 111, 4, 21.00, 9, 'Belgeler', '2024-08-14 09:00:00', '2024-08-19 16:00:00'),
+('TRK-000440', 88, 140, 5.00, 2, 'Kitap', '2024-09-21 17:00:00', '2024-09-24 13:00:00'),
 ('TRK-000441', 132, 10, 19.00, 7, 'Elektronik Cihaz', '2023-01-08 10:00:00', '2023-01-13 14:00:00'),
 ('TRK-000442', 65, 150, 6.00, 2, 'Kıyafet', '2023-02-21 11:00:00', '2023-02-24 10:00:00'),
 ('TRK-000443', 153, 85, 35.00, 17, 'Ev Eşyası', '2023-03-15 12:00:00', '2023-03-22 17:00:00'),
@@ -1271,105 +1271,105 @@ INSERT INTO Cargos (tracking_no, sender_user_id, receiver_user_id, weight, desi,
 
 -- 12. CargoStatuses
 
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (122, 1, 15, '2024-01-15 09:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (425, 2, 34, '2023-12-17 14:20:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (115, 2, 42, '2023-06-05 11:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (496, 7, 37, '2024-03-31 16:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (312, 6, 30, '2023-06-14 13:15:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (359, 5, 6, '2023-05-23 15:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (371, 6, 31, '2024-05-17 10:20:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (293, 2, 21, '2023-07-15 12:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (191, 1, 27, '2023-03-05 08:15:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (200, 4, 13, '2024-09-09 14:25:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (292, 4, 25, '2023-09-21 10:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (387, 2, 28, '2023-12-02 09:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (3, 1, 36, '2024-06-12 14:20:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (466, 2, 14, '2023-11-09 11:15:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (306, 5, 43, '2024-01-06 16:40:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (448, 6, 11, '2023-02-21 13:25:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (133, 9, 21, '2024-04-09 11:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (72, 7, 43, '2023-02-02 15:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (481, 3, 23, '2024-05-27 09:15:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (458, 6, 41, '2024-05-20 14:20:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (73, 3, 34, '2024-05-19 10:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (380, 8, 24, '2024-07-18 16:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (472, 2, 14, '2024-06-29 08:15:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (408, 3, 39, '2024-02-08 12:20:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (474, 9, 2, '2024-02-19 14:35:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (441, 5, 2, '2023-01-07 13:25:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (107, 3, 34, '2023-12-20 09:40:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (275, 7, 28, '2024-01-07 15:50:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (66, 8, 39, '2023-12-30 11:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (125, 8, 12, '2024-05-21 16:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (479, 9, 19, '2024-03-13 10:15:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (389, 9, 18, '2023-12-06 08:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (334, 1, 24, '2024-02-08 11:20:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (262, 1, 9, '2024-06-26 14:55:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (228, 7, 14, '2023-02-06 17:25:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (11, 1, 15, '2024-03-31 09:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (311, 3, 12, '2024-02-20 13:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (384, 9, 5, '2024-10-28 11:20:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (227, 2, 28, '2024-06-13 15:35:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (470, 1, 42, '2024-05-22 08:15:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (375, 8, 33, '2024-12-10 16:40:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (153, 7, 38, '2023-02-12 12:25:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (491, 3, 31, '2023-09-08 10:50:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (203, 8, 25, '2024-04-20 18:15:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (267, 3, 21, '2024-05-19 11:35:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (96, 4, 29, '2024-02-01 13:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (269, 6, 3, '2023-02-05 14:20:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (309, 2, 47, '2023-03-12 09:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (291, 4, 1, '2024-10-16 16:55:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (125, 6, 39, '2023-08-07 11:15:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (251, 6, 47, '2024-10-24 12:40:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (148, 5, 3, '2024-05-10 10:25:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (126, 1, 40, '2024-02-13 14:15:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (143, 9, 44, '2024-03-04 11:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (211, 9, 19, '2023-07-01 17:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (27, 7, 45, '2023-09-01 13:40:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (494, 6, 37, '2024-01-28 15:25:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (10, 1, 42, '2024-05-24 09:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (387, 4, 46, '2024-12-12 11:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (273, 7, 45, '2024-04-14 12:55:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (66, 8, 39, '2023-11-22 10:15:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (330, 3, 15, '2024-01-01 08:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (98, 7, 35, '2023-09-03 12:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (179, 4, 21, '2023-12-05 14:20:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (242, 1, 29, '2023-12-28 11:35:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (275, 4, 15, '2023-11-03 15:40:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (287, 9, 30, '2023-12-07 10:25:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (302, 1, 42, '2023-09-29 13:50:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (369, 4, 44, '2024-02-02 16:35:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (352, 7, 8, '2024-01-20 18:20:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (187, 3, 24, '2024-02-27 12:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (186, 9, 32, '2024-01-19 10:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (238, 9, 40, '2024-03-19 14:20:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (337, 8, 32, '2024-01-05 11:15:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (1, 2, 12, '2024-12-22 08:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (393, 9, 33, '2024-01-13 13:25:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (58, 3, 5, '2024-03-30 11:40:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (140, 7, 17, '2023-11-08 09:15:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (371, 9, 25, '2024-07-13 16:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (491, 9, 41, '2023-08-12 12:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (346, 2, 44, '2024-11-21 14:25:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (377, 6, 35, '2023-01-03 11:40:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (166, 2, 4, '2024-03-05 13:15:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (348, 9, 47, '2024-08-20 09:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (296, 9, 1, '2024-04-30 17:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (213, 4, 11, '2024-07-03 12:35:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (353, 2, 45, '2024-04-12 15:20:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (158, 9, 27, '2023-04-07 14:10:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (57, 6, 12, '2024-05-19 08:25:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (446, 6, 32, '2024-06-26 16:40:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (143, 2, 32, '2023-05-03 09:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (33, 1, 41, '2023-06-06 13:20:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (14, 2, 28, '2023-08-09 10:35:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (189, 8, 9, '2024-04-06 15:25:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (103, 3, 9, '2023-09-27 17:50:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (370, 9, 37, '2024-12-31 11:30:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (19, 7, 11, '2024-02-04 14:20:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (453, 7, 11, '2024-05-28 16:45:00');
-INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (271, 5, 37, '2024-07-08 13:55:00');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (122, 1, 15, '2025-02-01 19:18:50');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (425, 2, 34, '2023-12-17 02:04:28');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (115, 2, 42, '2023-06-05 07:10:29');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (496, 7, 37, '2024-03-31 10:07:18');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (312, 6, 30, '2023-06-14 06:32:52');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (359, 5, 6, '2023-05-23 02:18:21');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (371, 6, 31, '2024-05-17 05:04:44');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (293, 2, 21, '2023-07-15 19:00:19');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (191, 1, 27, '2023-03-05 06:48:27');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (200, 4, 13, '2024-09-09 07:33:21');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (292, 4, 25, '2023-09-21 13:53:46');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (387, 2, 28, '2023-12-02 12:39:01');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (3, 1, 36, '2024-06-12 21:24:44');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (466, 2, 14, '2023-11-09 05:40:54');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (306, 5, 43, '2024-01-06 01:37:22');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (448, 6, 11, '2023-02-21 09:11:45');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (133, 9, 21, '2025-04-09 03:03:11');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (72, 7, 43, '2023-02-02 22:50:46');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (481, 3, 23, '2024-05-27 17:33:23');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (458, 6, 41, '2024-05-20 01:19:19');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (73, 3, 34, '2025-05-19 03:35:55');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (380, 8, 24, '2024-07-18 23:48:41');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (472, 2, 14, '2024-06-29 04:42:23');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (408, 3, 39, '2025-02-08 11:49:56');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (474, 9, 2, '2024-02-19 22:30:59');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (441, 5, 2, '2023-01-07 10:48:34');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (107, 3, 34, '2023-12-20 12:30:52');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (275, 7, 28, '2024-01-07 10:17:55');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (66, 8, 39, '2023-12-30 14:16:32');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (125, 8, 12, '2024-05-21 12:26:29');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (479, 9, 19, '2024-03-13 12:25:19');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (389, 9, 18, '2023-12-06 04:55:34');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (334, 1, 24, '2024-02-08 14:15:47');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (262, 1, 9, '2025-06-26 15:40:04');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (228, 7, 14, '2023-02-06 20:38:19');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (11, 1, 15, '2025-03-31 22:06:05');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (311, 3, 12, '2025-02-20 10:55:54');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (384, 9, 5, '2024-10-28 04:11:42');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (227, 2, 28, '2025-06-13 02:54:13');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (470, 1, 42, '2024-05-22 04:41:45');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (375, 8, 33, '2024-12-10 22:57:18');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (153, 7, 38, '2023-02-12 08:45:40');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (491, 3, 31, '2023-09-08 18:58:02');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (203, 8, 25, '2025-04-20 22:30:46');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (267, 3, 21, '2024-05-19 15:30:37');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (96, 4, 29, '2025-02-01 12:06:35');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (269, 6, 3, '2023-02-05 17:06:11');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (309, 2, 47, '2023-03-12 00:57:51');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (291, 4, 1, '2024-10-16 22:08:23');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (125, 6, 39, '2023-08-07 08:27:52');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (251, 6, 47, '2024-10-24 15:33:14');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (148, 5, 3, '2025-05-10 02:44:01');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (126, 1, 40, '2024-02-13 20:30:47');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (143, 9, 44, '2024-03-04 08:21:22');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (211, 9, 19, '2023-07-01 23:22:09');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (27, 7, 45, '2023-09-01 16:28:16');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (494, 6, 37, '2025-01-28 20:35:21');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (10, 1, 42, '2024-05-24 20:06:19');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (387, 4, 46, '2024-12-12 02:02:49');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (273, 7, 45, '2024-04-14 16:18:34');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (66, 8, 39, '2023-11-22 02:22:04');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (330, 3, 15, '2025-01-01 02:38:08');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (98, 7, 35, '2023-09-03 04:53:23');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (179, 4, 21, '2023-12-05 11:36:24');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (242, 1, 29, '2023-12-28 16:06:13');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (275, 4, 15, '2023-11-03 21:22:03');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (287, 9, 30, '2023-12-07 12:08:09');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (302, 1, 42, '2023-09-29 11:37:42');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (369, 4, 44, '2025-02-02 17:41:34');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (352, 7, 8, '2025-01-20 21:17:38');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (187, 3, 24, '2024-02-27 17:47:09');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (186, 9, 32, '2024-01-19 07:32:46');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (238, 9, 40, '2024-03-19 02:32:33');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (337, 8, 32, '2024-01-05 09:46:11');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (1, 2, 12, '2024-12-22 05:44:42');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (393, 9, 33, '2025-01-13 15:45:26');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (58, 3, 5, '2025-03-30 14:12:28');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (140, 7, 17, '2023-11-08 05:32:27');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (371, 9, 25, '2024-07-13 20:12:13');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (491, 9, 41, '2023-08-12 18:30:50');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (346, 2, 44, '2024-11-21 21:41:33');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (377, 6, 35, '2023-01-03 16:17:43');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (166, 2, 4, '2024-03-05 17:21:44');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (348, 9, 47, '2024-08-20 11:42:41');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (296, 9, 1, '2025-04-30 23:11:37');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (213, 4, 11, '2025-07-03 10:46:46');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (353, 2, 45, '2025-04-12 22:24:49');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (158, 9, 27, '2023-04-07 17:21:48');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (57, 6, 12, '2025-05-19 04:40:08');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (446, 6, 32, '2024-06-26 20:26:13');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (143, 2, 32, '2023-05-03 02:11:38');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (33, 1, 41, '2023-06-06 11:15:21');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (14, 2, 28, '2023-08-09 07:30:43');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (189, 8, 9, '2024-04-06 18:51:18');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (103, 3, 9, '2023-09-27 23:00:13');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (370, 9, 37, '2024-12-31 02:59:39');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (19, 7, 11, '2025-02-04 17:48:58');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (453, 7, 11, '2024-05-28 22:56:34');
+INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (271, 5, 37, '2024-07-08 22:17:03');
 INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (317, 2, 13, '2024-09-25 03:03:12');
 INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (266, 3, 26, '2024-09-22 02:18:27');
 INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (72, 6, 38, '2024-04-16 08:24:45');

@@ -218,7 +218,7 @@ public class EmployeeServlet extends HttpServlet {
             case 1: return 2; // Genel Müdür
             case 2: return 3; // Şube Müdürü
             case 3: return 4; // Depo Görevlisi
-            case 4: return 5; // Bölge Sorumlusu
+            case 4: return 4; // Şube Personeli
             case 5: return 6; // Kurye
             default: return 6; // Varsayılan
         }
@@ -243,7 +243,6 @@ public class EmployeeServlet extends HttpServlet {
  * 14. depo görevlisi kargoyu transfer merkezinde yolda  kargo alındı olarak güncelleyebilir. kargoyu teslim edilecek şubeye doğru yönlendirir.
  * 15. iade edildi durumunu güncelleyecek ilgili personele ekleyebilirsin
  * 16. şube müdürü şube personellerini görebilir ve yönetebilir. şube personellerinin yaptığı tüm işlemleri yapabilir
- * 17. bölge sorumlusu depo sorumlularını görebilir ve yönetebilir. depo sorumlularının yaptığı tüm işlemleri yapabilir
  * 18. genel müdür tüm çalışanları görebilir ve yönetebilir. tüm çalışanların yaptığı tüm işlemleri yapabilir ekstra olarak rapor falan çıkarabilir
  * 19. admin kullanıcılar tüm kullanıcıların işlemlerini yapabilir. Çalışan eklemeleri üzerinde CRUD işlemlerini yapabilir.
  * 20. tüm kargoların durumlarını görebilir. ve yönetebilir

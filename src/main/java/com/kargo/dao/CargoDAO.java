@@ -132,22 +132,7 @@ public class CargoDAO {
         return false;
     }
     
-    public boolean addCargoStatus(int cargoId, int statusId, int updatedById) {
-        String sql = "INSERT INTO CargoStatuses (cargo_id, status_id, updated_by_id, update_date) VALUES (?, ?, ?, NOW())";
-        
-        try (Connection conn = DatabaseUtil.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-            stmt.setInt(1, cargoId);
-            stmt.setInt(2, statusId);
-            stmt.setInt(3, updatedById);
-            
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+
     
     public List<Cargo> getCargosByUserId(int userId) {
         List<Cargo> cargos = new ArrayList<>();
@@ -444,44 +429,7 @@ public class CargoDAO {
         return cargos;
     }
     
-    public List<Cargo> getCargosByRegion(int branchId) {
-        // Bölge Sorumlusu için bölgedeki tüm şubelerin kargoları
-        List<Cargo> cargos = new ArrayList<>();
-        String sql = "SELECT c.*, " +
-                    "sender.username as sender_name, receiver.username as receiver_name, " +
-                    "sender_addr.full_address as sender_address, receiver_addr.full_address as receiver_address, " +
-                    "cs.status_name as current_status " +
-                    "FROM Cargos c " +
-                    "LEFT JOIN Users sender ON c.sender_user_id = sender.user_id " +
-                    "LEFT JOIN Users receiver ON c.receiver_user_id = receiver.user_id " +
-                    "LEFT JOIN Addresses sender_addr ON sender.user_id = sender_addr.user_id " +
-                    "LEFT JOIN Addresses receiver_addr ON receiver.user_id = receiver_addr.user_id " +
-                    "LEFT JOIN CargoStatuses cs_latest ON c.cargo_id = cs_latest.cargo_id " +
-                    "LEFT JOIN Statuses cs ON cs_latest.status_type_id = cs.status_type_id " +
-                    "WHERE c.sender_user_id IN (SELECT user_id FROM Employees WHERE branch_id IN " +
-                    "(SELECT branch_id FROM Branches WHERE branch_id = ? OR branch_id IN " +
-                    "(SELECT branch_id FROM Branches WHERE address_id IN " +
-                    "(SELECT address_id FROM Addresses WHERE city_id = " +
-                    "(SELECT city_id FROM Addresses WHERE address_id = " +
-                    "(SELECT address_id FROM Branches WHERE branch_id = ?)))))) " +
-                    "AND cs_latest.update_date = (SELECT MAX(update_date) FROM CargoStatuses WHERE cargo_id = c.cargo_id) " +
-                    "ORDER BY c.shipping_date DESC";
-        
-        try (Connection conn = DatabaseUtil.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-            stmt.setInt(1, branchId);
-            stmt.setInt(2, branchId);
-            ResultSet rs = stmt.executeQuery();
-            
-            while (rs.next()) {
-                cargos.add(mapResultSetToCargo(rs));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return cargos;
-    }
+
     
     public List<Cargo> getCargosByCourier(int userId) {
         // Kurye için kendisine atanan kargolar (basit sistem)
@@ -525,6 +473,35 @@ public class CargoDAO {
             stmt.setInt(2, cargoStatus.getStatusTypeId());
             stmt.setInt(3, cargoStatus.getUpdatedById());
             stmt.setTimestamp(4, cargoStatus.getUpdatedDate());
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean addCargoStatus(int cargoId, int statusTypeId, int updatedById) {
+        String sql = "INSERT INTO CargoStatuses (cargo_id, status_type_id, updated_by_id, update_date) VALUES (?, ?, ?, NOW())";
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, cargoId);
+            stmt.setInt(2, statusTypeId);
+            stmt.setInt(3, updatedById);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean assignCourierToCargo(int cargoId, int courierUserId) {
+        String sql = "UPDATE Cargos SET courier_user_id = ? WHERE cargo_id = ?";
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, courierUserId);
+            stmt.setInt(2, cargoId);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
