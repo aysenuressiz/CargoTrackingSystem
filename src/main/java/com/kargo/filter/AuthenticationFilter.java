@@ -84,10 +84,7 @@ public class AuthenticationFilter implements Filter {
         chain.doFilter(request, response);
     }
     
-    private boolean isEmployee(String roleName) {
-        return Arrays.asList("Genel Müdür", "Şube Müdürü", "Depo Görevlisi", "Bölge Sorumlusu", "Kurye")
-                .contains(roleName);
-    }
+
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {}

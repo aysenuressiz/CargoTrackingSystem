@@ -224,3 +224,30 @@ public class EmployeeServlet extends HttpServlet {
         }
     }
 }
+
+/*
+ * Şimdi bu projede istediklerimi sıralıyorum
+ * 1. Admin çalışan ve müşteri olarak 3 grup var 
+ * 2. müşteriler şirket ve bireysel müşteri olarak ikiye ayrılıyor
+ * 3. yani toplam 4 farklı kullanıcı tipi var
+ * 4. Şirketler ve müşteriler giriş yapabilir kayıtları yoksa kayıt olabilirler
+ * 5. çalışanların giriş yapabilmei için kullanıcı kaydı olamalı kayıtları yoksa yalnızca admin kullanıcılar tarafından oluşturulabilir.
+ * 6. çalışanların emailleri @kargo.com.tr uzantılıdır
+ * 7. her kullanıcı  tipi login ekranında giriş yapınca kendi sayfasına yönelndirilecek admin admin dashboard müşreti müşteri dashboard gibisinde olacak
+ * 8. bireysel müşteri kendi bilgileriyle giriş yapınca yönlendirldiği dashboard ekranında teslim aldığı aktif kargoları iptal edelineleri ve gönderdiği kargoları görebilir. hem istatiksel hem de liste halinde takip numarası sorgulama yeriyle kendine ait rastgele bir kargonun durumunu görebilir. Ayrıca bir de profil ekranı olur bu profilde veri tabanından çekilen bilgiler gözükür ve güncelleyebilir.
+ * 9. şirket müşterileri bireysel müşterilerin yaptığı tüm işlemleri yapabilir ekstra olarak şirket durumu için gerek ne varsa yapabilir vergi bilgilerini kullanarak rapor fatura vs çıkarabilir.
+ * 10. çalışanlar genel müdür, şube müdür, depo görevlisi, şube personeli ve kurye olarak 5 farklı pozisyon var.
+ * 11. her çalışan pozisyonuna göre yetkilendirilir ve çalışan sayfada yetkisine göre iş yapar
+ * 12. kuryeler kendilerine atanan kargoları görebilir ve bu kargoların durumlarını teslim edildi  iptal edildi teslim edilemedi gibi değiştitrebilri ve kargo sahibine duruma göre varsayılan bir mesaj gönderimi yeri olur.
+ * 13. şube personeli kargo durumunu kargo alındı yolda şubede dağıtıma çıktı gibi durumlarla güncelleyebilir. şubede olan kargoları kargoculara atayabilir.
+ * 14. depo görevlisi kargoyu transfer merkezinde yolda  kargo alındı olarak güncelleyebilir. kargoyu teslim edilecek şubeye doğru yönlendirir.
+ * 15. iade edildi durumunu güncelleyecek ilgili personele ekleyebilirsin
+ * 16. şube müdürü şube personellerini görebilir ve yönetebilir. şube personellerinin yaptığı tüm işlemleri yapabilir
+ * 17. bölge sorumlusu depo sorumlularını görebilir ve yönetebilir. depo sorumlularının yaptığı tüm işlemleri yapabilir
+ * 18. genel müdür tüm çalışanları görebilir ve yönetebilir. tüm çalışanların yaptığı tüm işlemleri yapabilir ekstra olarak rapor falan çıkarabilir
+ * 19. admin kullanıcılar tüm kullanıcıların işlemlerini yapabilir. Çalışan eklemeleri üzerinde CRUD işlemlerini yapabilir.
+ * 20. tüm kargoların durumlarını görebilir. ve yönetebilir
+ * 21. ekstra durumlar varsa eklenebilir
+ * 
+ * 
+ */
